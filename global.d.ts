@@ -10,7 +10,7 @@ declare global {
     interface Window {
         p5: typeof module,
     }
-    
+
     function loadSound(
         path: string | string[] | p5.File,
         successCallback?: () => void,
@@ -18,5 +18,4 @@ declare global {
         loadingCallback?: (percectangeLoaded: number) => void,
     ): p5.SoundFile;
 }
-
 
