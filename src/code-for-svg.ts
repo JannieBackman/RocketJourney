@@ -112,7 +112,7 @@ window.addEventListener('load', (event) => {
         planetR.setAttribute("src", `/images/${imagesPlanetR[index]}.svg`);
     };
 
-setInterval(renderPic, 500);
-setInterval(renderBg, 300);
+// setInterval(renderPic, 500);
+// setInterval(renderBg, 300);
 
 });
