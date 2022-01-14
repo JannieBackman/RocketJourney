@@ -1,7 +1,10 @@
 //---- GLOBAL VARIABLES ----//
-// let game: Game;
+let game: Game;
 // let sound: p5.SoundFile
-let img: p5.Image;
+let backgroundImage: p5.Image;
+let startText: p5.Image;
+let rocketImg: p5.Image;
+let rocket: Rocket;
 
 /**
  * Built in preload function in P5
@@ -10,7 +13,13 @@ let img: p5.Image;
  */
 function preload() {
     // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
-    img = loadImage('/assets/images/background-1.svg');
+    backgroundImage = loadImage('/assets/images/background-1.svg');
+    startText = loadImage('/assets/images/Rocket-Journey.svg');
+
+    rocketImg = loadImage('/assets/images/rocket-1.svg')
+
+
+
 }
 
 /**
@@ -21,10 +30,11 @@ function preload() {
  */
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    loadImage('/assets/images/background-1.svg')
     frameRate(60);
     // noCursor();
     // game = new Game();
+
+    game = new Game();
 }
 
 /**
@@ -35,7 +45,7 @@ function setup() {
 function draw() {
     // background('blue');
     background('rgb(0, 4, 10)');
-    drawBackgroundImage();
+    // image(startText, ((windowWidth * .5) - (imgW8percent * .5)), ((windowHeight * .5) - (imgH8percent * .5)) + (imgH8percent / 2 - startText.height / 2));
     // fill('green');
     // stroke('white');
     // strokeWeight(10);
@@ -44,6 +54,8 @@ function draw() {
     // image(img, (windowWidth*.5)-(img.width*.05), (windowHeight*.5)-(img.height*.05), img.width*0.1, img.height*0.1);
     // game.update();
     // game.draw();
+
+    game.displayBackground();
 }
 
 
@@ -52,15 +64,7 @@ function draw() {
  */
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+    game.resize(windowWidth, windowHeight);
+
 }
 
-function drawBackgroundImage() {
-    let imgW80percent = img.width * .1 * .8;
-    let imgH80percent = img.height * .1 * .8;
-
-    if (windowWidth <= 800) {
-        image(img, ((windowWidth*.5)-(imgW80percent*.5)), ((windowHeight*.5)-(imgH80percent*.5)), imgW80percent, imgH80percent);
-    } else {
-        image(img, (windowWidth*.5)-(img.width*.05), (windowHeight*.5)-(img.height*.05), img.width*.1, img.height*.1);
-    }
-}
