@@ -3,8 +3,8 @@ let game: Game;
 // let sound: p5.SoundFile
 let backgroundImage: p5.Image;
 let startText: p5.Image;
-let rocketImg: p5.Image;
-let rocket: Rocket;
+let rocketImgOne: p5.Image;
+let rocketImgTwo: p5.Image;
 
 /**
  * Built in preload function in P5
@@ -15,11 +15,8 @@ function preload() {
     // sound: p5.SoundFile = loadSound('../assets/mySound.wav');
     backgroundImage = loadImage('/assets/images/background-1.svg');
     startText = loadImage('/assets/images/Rocket-Journey.svg');
-
-    rocketImg = loadImage('/assets/images/rocket-1.svg')
-
-
-
+    rocketImgOne = loadImage('/assets/images/rocket-1.svg');
+    rocketImgTwo = loadImage('/assets/images/rocket-2.svg');
 }
 
 /**
@@ -31,10 +28,14 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
+    
     // noCursor();
     // game = new Game();
 
     game = new Game();
+    // resize is called because the scale should be calculated at setup as well
+    game.resize(windowWidth, windowHeight);
+
 }
 
 /**
@@ -43,8 +44,8 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-    // background('blue');
-    background('rgb(0, 4, 10)');
+    background('blue');
+    // background('rgb(0, 4, 10)');
     // image(startText, ((windowWidth * .5) - (imgW8percent * .5)), ((windowHeight * .5) - (imgH8percent * .5)) + (imgH8percent / 2 - startText.height / 2));
     // fill('green');
     // stroke('white');
@@ -55,7 +56,7 @@ function draw() {
     // game.update();
     // game.draw();
 
-    game.displayBackground();
+    game.draw();
 }
 
 
