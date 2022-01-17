@@ -1,35 +1,36 @@
-class Game {
+/// <reference path="iscene.ts" />
+
+class Game implements IScene {
+    gameManager: GameManager;
+
+    get p5() {
+        return this.gameManager.p5;
+    }
+
     scale: number;
-    background: Background;
     rocket: Rocket;
 
-    constructor() {
+    rocketSprite?: Sprite;
+
+    constructor(gameManager: GameManager) {
+        this.gameManager = gameManager;
         this.scale = 1;
-        // background
-        this.background = new Background();
-        // rocket 
+
         let rocketImgHeight: number = 180 * 0.35;
         let rocketImgWidth: number = 330 * 0.35;
-        this.rocket = new Rocket(0, (this.background.height - (rocketImgHeight * this.scale))/2, rocketImgWidth, rocketImgHeight, 5);
+        this.rocket = new Rocket(gameManager, this, 0, (this.gameManager.window.height - (rocketImgHeight * this.scale)) / 2, rocketImgWidth, rocketImgHeight, 5);
     }
 
-    draw() {
-        this.background.display(this.scale);
+    preload() {
+        let rocketImages = [
+            this.p5.loadImage('/assets/images/rocket-1.svg'),
+            this.p5.loadImage('/assets/images/rocket-2.svg')
+        ];
+
+        this.rocketSprite = new Sprite(this.gameManager, rocketImages, 115, 63, 500);
+    }
+
+    render() {
         this.rocket.display(this.scale);
-    }
-
-    update() {
-
-    }
-
-    resize(width: number, height: number) {
-        // this is set for scaling down all objects + background
-        // "else" is necessary here even if the preset is 1 because the user may resize it back to normal 
-        if (windowWidth <= 800) {
-            this.scale = 0.8; // 80%
-        } else {
-            this.scale = 1; // 100% 
-        }
-        this.background.resize(width, height);
     }
 }
