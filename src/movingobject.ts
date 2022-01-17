@@ -11,7 +11,6 @@ class MovingObject {
     width: number;
     height: number;
     speed: number;
-    timeCounter: number;
 
     constructor(gameManager: GameManager, scene: IScene, x: number, y: number, width: number, height: number, speed: number) {
         this.gameManager = gameManager;
@@ -22,12 +21,10 @@ class MovingObject {
         this.width = width;
         this.height = height;
         this.speed = speed;
-        this.timeCounter = 0;
+        // this.timeCounter = 0;
     }
 
     moveUp() {
-        // this.y = this.y - this.speed;
-        // let this.y = 0; let this.speed = 10; 0 = 0 - 10 
         this.y -= this.speed;
         if (this.y < 0) {
             this.y = 0;
