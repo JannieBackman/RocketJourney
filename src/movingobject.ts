@@ -1,13 +1,23 @@
 class MovingObject {
+    gameManager: GameManager;
+    scene: IScene;
+
+    get p5() {
+        return this.gameManager.p5;
+    }
+
     x: number;
     y: number;
     width: number;
     height: number;
     speed: number;
-    timeCounter: number; 
+    timeCounter: number;
 
-    constructor(x: number, y: number, width: number, height: number, speed: number) {
-        this.x = x; 
+    constructor(gameManager: GameManager, scene: IScene, x: number, y: number, width: number, height: number, speed: number) {
+        this.gameManager = gameManager;
+        this.scene = scene;
+
+        this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
@@ -26,8 +36,8 @@ class MovingObject {
 
     moveDown() {
         this.y += this.speed;
-        if (this.y > game.background.height - this.height) {
-            this.y = game.background.height - this.height;
+        if (this.y > this.gameManager.window.height - this.height) {
+            this.y = this.gameManager.window.height - this.height;
         }
     }
 
@@ -40,8 +50,8 @@ class MovingObject {
 
     moveRight() {
         this.x += this.speed;
-        if (this.x > game.background.width - this.width) {
-            this.x = game.background.width - this.width;
+        if (this.x > this.gameManager.window.width - this.width) {
+            this.x = this.gameManager.window.width - this.width;
         }
     }
 }

@@ -1,19 +1,40 @@
 <html>
-    <head>
-        <style>
-            html, body, canvas {
-                height: 100%;
-                width: 100%;
-                margin: 0;
-                background: black;
-            }
-        </style>
 
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/addons/p5.sound.js"></script>
-        <script src="build/bundle.js"></script>
-    </head>
-    <body>
-        <!-- Code injected via JavaScript -->
-    </body>
+<head>
+    <style>
+        html,
+        body,
+        canvas {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            background: black;
+        }
+
+        main {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media screen and (max-width: 800px) {
+            canvas {
+                width: 100% !important;
+                height: unset !important;
+            }
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/addons/p5.sound.js"></script>
+    <script src="build/bundle.js"></script>
+    <script>let gameManager = new GameManager();</script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Code injected via JavaScript -->
+</body>
+
 </html>
