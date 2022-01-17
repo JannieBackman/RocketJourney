@@ -1,34 +1,35 @@
-
-
 class Game {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
+    scale: number;
+    background: Background;
+    rocket: Rocket;
 
     constructor() {
-        this.x = (windowWidth * .5) - (backgroundImage.width * .05);
-        this.y = (windowHeight * .5) - (backgroundImage.height * .05);
-        this.width = backgroundImage.width * .1;
-        this.height = backgroundImage.height * .1;
+        this.scale = 1;
+        // background
+        this.background = new Background();
+        // rocket 
+        let rocketImgHeight: number = 180 * 0.35;
+        let rocketImgWidth: number = 330 * 0.35;
+        this.rocket = new Rocket(0, (this.background.height - (rocketImgHeight * this.scale))/2, rocketImgWidth, rocketImgHeight, 5);
+    }
+
+    draw() {
+        this.background.display(this.scale);
+        this.rocket.display(this.scale);
+    }
+
+    update() {
+
     }
 
     resize(width: number, height: number) {
-        this.x = (width * .5) - (backgroundImage.width * .05);
-        this.y = (height * .5) - (backgroundImage.height * .05);
-        this.width = backgroundImage.width * .1;
-        this.height = backgroundImage.height * .1;
-    }
-
-    displayBackground() {
-        let imgW80percent = backgroundImage.width * .1 * .8;
-        let imgH80percent = backgroundImage.height * .1 * .8;
-
+        // this is set for scaling down all objects + background
+        // "else" is necessary here even if the preset is 1 because the user may resize it back to normal 
         if (windowWidth <= 800) {
-            image(backgroundImage, ((windowWidth * .5) - (imgW80percent * .5)), ((windowHeight * .5) - (imgH80percent * .5)), imgW80percent, imgH80percent);
+            this.scale = 0.8; // 80%
         } else {
-            image(backgroundImage, this.x, this.y, this.width, this.height);
+            this.scale = 1; // 100% 
         }
-
+        this.background.resize(width, height);
     }
 }
