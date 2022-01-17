@@ -17,6 +17,7 @@ class GameManager {
 
     startMenuScene: IScene = new StartMenu(this);
     gameScene: Game = new Game(this);
+    gameOverScene: IScene = new GameOverMenu(this);
 
     constructor() {
         this.p5 = new p5((p) => {
@@ -29,15 +30,16 @@ class GameManager {
 
     preload() {
         let backgroundImages = [
-            this.p5.loadImage('/assets/images/background-1.svg'),
+            this.p5.loadImage('/assets/images/background-3.svg'),
             this.p5.loadImage('/assets/images/background-2.svg'),
-            this.p5.loadImage('/assets/images/background-3.svg')
+            this.p5.loadImage('/assets/images/background-1.svg')
         ];
 
         this.backgroundSprite = new Sprite(this, backgroundImages, this.window.width, this.window.height, 250);
 
         this.startMenuScene.preload();
         this.gameScene.preload();
+        this.gameOverScene.preload();
     }
 
     setup() {
@@ -49,6 +51,10 @@ class GameManager {
     keyPressed() {
         if (this.p5.keyCode === 32) {
             this.renderer.setScene(this.gameScene);
+        }
+        //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
+        if (this.p5.keyCode === 13) {
+            this.renderer.setScene(this.gameOverScene);
         }
     }
 }
