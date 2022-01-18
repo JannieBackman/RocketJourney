@@ -1,4 +1,4 @@
-/// <reference path="iscene.ts" />
+///// <reference path="iscene.ts" />
 
 interface GameWindow {
     width: number;
@@ -8,8 +8,8 @@ interface GameWindow {
 }
 
 class GameManager {
-    renderer: Renderer = new Renderer(this);
-    p5: p5;
+    // renderer: Renderer = new Renderer(this);
+    // p5: p5;
 
     window: GameWindow = { width: 800, height: 600, x: 0, y: 0 };
 
@@ -18,6 +18,7 @@ class GameManager {
     startMenuScene: IScene = new StartMenu(this);
     gameScene: Game = new Game(this);
     gameOverScene: IScene = new GameOverMenu(this);
+    randomSprite: any;
 
     constructor() {
         this.p5 = new p5((p) => {
@@ -29,11 +30,11 @@ class GameManager {
     }
 
     preload() {
-        let backgroundImages = [
-            this.p5.loadImage('/assets/images/background-3.svg'),
-            this.p5.loadImage('/assets/images/background-2.svg'),
-            this.p5.loadImage('/assets/images/background-1.svg')
-        ];
+        // let backgroundImages = [
+        //     this.p5.loadImage('/assets/images/background-3.svg'),
+        //     this.p5.loadImage('/assets/images/background-2.svg'),
+        //     this.p5.loadImage('/assets/images/background-1.svg')
+        // ];
 
         this.backgroundSprite = new Sprite(this, backgroundImages, this.window.width, this.window.height, 250);
 

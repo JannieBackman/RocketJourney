@@ -1,27 +1,31 @@
 class MovingObject {
-    gameManager: GameManager;
-    scene: IScene;
 
-    get p5() {
-        return this.gameManager.p5;
-    }
+    private x: number;
+    private y: number;
+    private width: number;
+    private height: number;
+    private speed: number;
+    private frames: p5.Image[] = [];
+    private interval?: number = undefined;
+    private deltaTime: number = 0;
+    private frameIndex: number = 0;
 
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    speed: number;
 
-    constructor(gameManager: GameManager, scene: IScene, x: number, y: number, width: number, height: number, speed: number) {
-        this.gameManager = gameManager;
-        this.scene = scene;
+
+
+    constructor(x: number, y: number, width: number, height: number, speed: number) {
 
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.speed = speed;
-        // this.timeCounter = 0;
+        if (Array.isArray(frames)) {
+            this.frames = frames;
+        } else {
+            this.frames.push(frames);
+        }
+        this.interval = interval;
     }
 
     moveUp() {
@@ -33,8 +37,8 @@ class MovingObject {
 
     moveDown() {
         this.y += this.speed;
-        if (this.y > this.gameManager.window.height - this.height) {
-            this.y = this.gameManager.window.height - this.height;
+        if (this.y > this.game.window.height - this.height) {
+            this.y = this.game.window.height - this.height;
         }
     }
 
@@ -50,5 +54,24 @@ class MovingObject {
         if (this.x > this.gameManager.window.width - this.width) {
             this.x = this.gameManager.window.width - this.width;
         }
+    }
+
+    fadeInObstacle() { 
+        this.x = this.x - this.speed; 
+    }
+
+    animate() {
+        if (this.interval !== undefined) {
+            this.deltaTime += this.deltaTime;
+            if (this.deltaTime > this.interval) {
+                this.frameIndex = (this.frameIndex + 1) % this.frames.length;
+                this.deltaTime = this.deltaTime - this.interval;
+            }
+        }
+    }
+
+    render(x: number, y: number) {
+        this.animate();
+        image(this.frames[this.frameIndex], x, y, this.width, this.height)
     }
 }

@@ -1,12 +1,12 @@
-/// <reference path="iscene.ts" />
+///// <reference path="iscene.ts" />
 
-class GameOverMenu implements IScene {
+class GameOverMenu //implements IScene// {
 
-    gameManager: GameManager;
+    // gameManager: GameManager;
 
-    get p5() {
-        return this.gameManager.p5;
-    }
+    // get p5() {
+    //     return this.gameManager.p5;
+    // }
 
 
     gameOverSprite?: Sprite;
@@ -33,7 +33,7 @@ class GameOverMenu implements IScene {
 
     }
 
-    render() {
+    draw() {
         if (this.gameOverSprite === undefined) {
             return;
         }

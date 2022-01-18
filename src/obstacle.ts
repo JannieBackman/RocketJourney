@@ -9,5 +9,6 @@ class Obstacle extends MovingObject {
 
     display() {
         this.sprite.render(this.gameManager.window.x + this.x, this.gameManager.window.y + this.y);
+        this.fadeInObstacle();
     }
 }
