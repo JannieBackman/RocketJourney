@@ -1,4 +1,4 @@
-interface IScene {
-    preload(): void;
-    render(): void;
-} 
+// interface IScene {
+//     preload(): void;
+//     render(): void;
+// } 
