@@ -18,8 +18,6 @@ class Rocket extends MovingObject {
             this.moveUp();
         } else if (keyIsDown(DOWN_ARROW)) {
             this.moveDown();
-        } else if (keyCode === 39) {
-            this.moveRight(); 
-         }    
+        } 
     } 
 }
