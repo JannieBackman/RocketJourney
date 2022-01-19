@@ -7,8 +7,8 @@ class MovingObject {
     protected width: number;
     protected height: number;
     protected speed: number;
-    private angle: number;
-    protected timeCounter: number;
+    protected angle: number;
+    protected animationTimeCounter: number;
     protected images: p5.Image[] = []; 
 
     constructor(gameManager: GameManager, images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, angle?: number) {
@@ -20,11 +20,15 @@ class MovingObject {
         this.height = height;
         this.speed = speed;
 		this.angle = angle ?? 0;
-        this.timeCounter = 0;
+        this.animationTimeCounter = 0;
     }
 
     public update() {
-        this.timeCounter += deltaTime; 
+        this.animationTimeCounter += deltaTime; 
+    }
+
+    public increaseSpeed() {
+        this.speed += 1;
     }
 
     protected moveUp() {
@@ -41,6 +45,7 @@ class MovingObject {
         }
     }
     
+    /*
     moveLeft() {
         this.x -= this.speed;
         if (this.x < 0) {
@@ -54,11 +59,13 @@ class MovingObject {
             this.x = this.gameManager.window.width - this.width;
         }
     }
+    */
   
     protected moveToStart() {
-        this.x += this.speed * .5  ;
+        this.x += this.speed * .5;
         if (this.x > this.gameManager.window.width - 600) {
             this.x = this.gameManager.window.width - 600 ;
         }
     }
+
 }

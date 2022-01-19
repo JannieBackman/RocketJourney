@@ -1,16 +1,17 @@
 class Rocket extends MovingObject {
-    draw() {
+    
+    public draw() {
         this.update();
         this.moveToStart();
         
         let i; 
-        if (this.timeCounter < 500) {
+        if (this.animationTimeCounter < 500) {
             i = 0; 
         } else {
             i = 1;
         } image(this.images[i], this.x, this.y, this.width, this.height)
-        if (this.timeCounter >= 1000) {
-            this.timeCounter = 0;
+        if (this.animationTimeCounter >= 1000) {
+            this.animationTimeCounter = 0;
         }
 
         if (keyIsDown(UP_ARROW)) {
@@ -20,8 +21,5 @@ class Rocket extends MovingObject {
         } else if (keyCode === 39) {
             this.moveRight(); 
          }    
-        //  else if (keyCode === 37){
-        //     this.moveLeft();
-        // }
     } 
 }

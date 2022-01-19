@@ -1,21 +1,21 @@
 class Obstacle extends MovingObject {
 
-  draw() {
+    public draw() {
         this.update();
+        this.fadeInObstacle();
+
         let i; 
-        if (this.timeCounter < 500) {
+        if (this.animationTimeCounter < 500) {
             i = 0; 
         } else {
             i = 1;
         } image(this.images[i], this.x, this.y, this.width, this.height)
-        if (this.timeCounter >= 1000) {
-            this.timeCounter = 0;
+        if (this.animationTimeCounter >= 1000) {
+            this.animationTimeCounter = 0;
         }
-
-        this.fadeInObstacle();
     }
  
-    fadeInObstacle() { 
+    protected fadeInObstacle() { 
         this.x = this.x - this.speed; 
     }
 }
