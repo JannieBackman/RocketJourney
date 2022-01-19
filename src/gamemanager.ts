@@ -18,6 +18,7 @@ class GameManager {
     startMenuScene: IScene = new StartMenu(this);
     gameScene: Game = new Game(this);
     gameOverScene: IScene = new GameOverMenu(this);
+    scoreBoardScene: IScene = new ScoreBoard(this);
     scene: IScene = this.startMenuScene;
 
 	movingObjects: MovingObject[] = [];
@@ -54,6 +55,10 @@ class GameManager {
         //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
         if (keyCode === 13) {
             this.setScene(this.gameOverScene);
+        }
+        // Så man kan se scoreboard-sidan
+        if (keyCode === 8) {
+            this.setScene(this.scoreBoardScene);
         }
     }
 }
