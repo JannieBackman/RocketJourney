@@ -2,19 +2,18 @@ class MovingObject {
     gameManager: GameManager;
     // image: AnimatedImage;
 
-    public x: number;
-    public y: number;
-    public width: number;
-    public height: number;
-    private speed: number;
+    protected x: number;
+    protected y: number;
+    protected width: number;
+    protected height: number;
+    protected speed: number;
     private angle: number;
     protected timeCounter: number;
+    protected images: p5.Image[] = []; 
 
-    constructor(gameManager: GameManager, x: number, y: number, width: number, height: number, speed: number, angle?: number) {
-    // constructor(gameManager: GameManager, image: AnimatedImage, x: number, y: number, width: number, height: number, speed: number, angle?: number) {
+    constructor(gameManager: GameManager, images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, angle?: number) {
         this.gameManager = gameManager;
-        // this.image = image;
-
+        this.images = images; 
         this.x = x;
         this.y = y;
         this.width = width;
@@ -24,19 +23,18 @@ class MovingObject {
         this.timeCounter = 0;
     }
 
-    draw() {
-        // this.image.draw(this.x, this.y);
+    public update() {
         this.timeCounter += deltaTime; 
     }
 
-    moveUp() {
+    protected moveUp() {
         this.y -= this.speed;
         if (this.y < 0) {
             this.y = 0;
         }
     }
 
-    moveDown() {
+    protected moveDown() {
         this.y += this.speed;
         if (this.y > this.gameManager.window.height - this.height) {
             this.y = this.gameManager.window.height - this.height;
@@ -57,7 +55,7 @@ class MovingObject {
         }
     }
   
-    moveToStart() {
+    protected moveToStart() {
         this.x += this.speed * .5  ;
         if (this.x > this.gameManager.window.width - 600) {
             this.x = this.gameManager.window.width - 600 ;

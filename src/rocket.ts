@@ -1,6 +1,6 @@
 class Rocket extends MovingObject {
-    display() {
-        this.draw();
+    draw() {
+        this.update();
         this.moveToStart();
         
         let i; 
@@ -8,7 +8,7 @@ class Rocket extends MovingObject {
             i = 0; 
         } else {
             i = 1;
-        } image(images.rocket[i], this.x, this.y, this.width, this.height)
+        } image(this.images[i], this.x, this.y, this.width, this.height)
         if (this.timeCounter >= 1000) {
             this.timeCounter = 0;
         }
