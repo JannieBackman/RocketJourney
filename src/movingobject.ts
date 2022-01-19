@@ -38,7 +38,7 @@ class MovingObject {
             this.y = this.gameManager.window.height - this.height;
         }
     }
-
+    
     moveLeft() {
         this.x -= this.speed;
         if (this.x < 0) {
@@ -52,7 +52,7 @@ class MovingObject {
             this.x = this.gameManager.window.width - this.width;
         }
     }
-
+  
     moveToStart() {
         this.x += this.speed * .5  ;
         if (this.x > this.gameManager.window.width - 600) {
