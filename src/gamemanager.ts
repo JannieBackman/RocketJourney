@@ -1,4 +1,7 @@
 /// <reference path="iscene.ts" />
+/// <reference path="startmenu.ts" />
+/// <reference path="game.ts" />
+/// <reference path="gameover.ts" />
 
 interface GameWindow {
     width: number;
@@ -8,53 +11,49 @@ interface GameWindow {
 }
 
 class GameManager {
-    renderer: Renderer = new Renderer(this);
-    p5: p5;
-
     window: GameWindow = { width: 800, height: 600, x: 0, y: 0 };
 
-    backgroundSprite?: Sprite;
+    backgroundImage?: AnimatedImage;
 
     startMenuScene: IScene = new StartMenu(this);
     gameScene: Game = new Game(this);
     gameOverScene: IScene = new GameOverMenu(this);
+    scene: IScene = this.startMenuScene;
 
-    constructor() {
-        this.p5 = new p5((p) => {
-            p.preload = this.preload.bind(this);
-            p.setup = this.setup.bind(this);
-            p.draw = this.renderer.render.bind(this.renderer);
-            p.keyPressed = this.keyPressed.bind(this);
-        });
-    }
+	movingObjects: MovingObject[] = [];
 
-    preload() {
-        let backgroundImages = [
-            this.p5.loadImage('/assets/images/background-3.svg'),
-            this.p5.loadImage('/assets/images/background-2.svg'),
-            this.p5.loadImage('/assets/images/background-1.svg')
-        ];
+	/*
+	function createMovingObject(frames: p5.Image[] | p5.Image, width: number, height: number, interval?: number) {
+		
+	}
+	*/
 
-        this.backgroundSprite = new Sprite(this, backgroundImages, this.window.width, this.window.height, 250);
-
-        this.startMenuScene.preload();
-        this.gameScene.preload();
-        this.gameOverScene.preload();
+    setScene(scene: IScene) {
+        this.scene = scene;
+		if(this.scene.setup !== undefined) {
+			this.scene.setup();
+		}
     }
 
     setup() {
-        this.p5.createCanvas(this.window.width, this.window.height);
-        this.p5.frameRate(30);
-        this.renderer.setScene(this.startMenuScene);
+		this.backgroundImage = new AnimatedImage(images.background, this.window.width, this.window.height, 250);
+		this.scene.setup();
+    }
+
+    draw() {
+        background('rgb(0, 4, 10)');
+
+        this.backgroundImage?.draw(this.window.x, this.window.y);
+		this.scene.draw();
     }
 
     keyPressed() {
-        if (this.p5.keyCode === 32) {
-            this.renderer.setScene(this.gameScene);
+        if (keyCode === 32) {
+            this.setScene(this.gameScene);
         }
         //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
-        if (this.p5.keyCode === 13) {
-            this.renderer.setScene(this.gameOverScene);
+        if (keyCode === 13) {
+            this.setScene(this.gameOverScene);
         }
     }
 }
