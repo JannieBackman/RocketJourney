@@ -51,9 +51,9 @@ class GameManager {
     keyPressed() {
         if (keyCode === 32) {
             this.setScene(this.gameScene);
-        }
+        } console.log(keyCode)
         //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
-        if (keyCode === 13) {
+        if (keyIsDown(ENTER)) {
             this.setScene(this.gameOverScene);
         }
         // Så man kan se scoreboard-sidan
@@ -62,4 +62,8 @@ class GameManager {
         }
     }
 }
-
+        if (keyIsDown(ESCAPE)) {
+            this.setScene(this.startMenuScene);
+        }
+    }   
+} 
