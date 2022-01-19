@@ -38,7 +38,7 @@ class MovingObject {
             this.y = this.gameManager.window.height - this.height;
         }
     }
-
+    
     moveLeft() {
         this.x -= this.speed;
         if (this.x < 0) {
