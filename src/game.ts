@@ -4,11 +4,10 @@ class Game implements IScene {
 
     rocket?: Rocket;
     obstacle?: Obstacle;
-    rocketImage?: AnimatedImage;
+    rocketImage?: p5.Image;
     obstacleImages: AnimatedImage[] = [];
     obstacles: Obstacle[] = [];
     timeCounter: number;
-
 	// physicsEngine : PhysicsEngine = new PhysicsEngine();
 
     constructor(gameManager: GameManager) {
@@ -17,9 +16,11 @@ class Game implements IScene {
     }
 
 	setup() {
-		this.rocketImage = new AnimatedImage(images.rocket, 115, 63, 500);
-		this.rocket = new Rocket(this.gameManager, this.rocketImage, 10, (this.gameManager.window.height - this.rocketImage.height) / 2, this.rocketImage.width, this.rocketImage.height, 5);
+        this.rocket = new Rocket(this.gameManager, 10, (this.gameManager.window.height - 115) /2, 115, 63, 5)
+		// this.rocketImage = new AnimatedImage(images.rocket, 115, 63, 500);
+		// this.rocket = new Rocket(this.gameManager, this.rocketImage, 10, (this.gameManager.window.height - this.rocketImage.height) / 2, this.rocketImage.width, this.rocketImage.height, 5);
 
+        this.obstacleImages.push(new AnimatedImage(images.jellyFish, 69, 42, 500));
         this.obstacleImages.push(new AnimatedImage(images.jellyFish, 69, 42, 500));
         this.obstacleImages.push(new AnimatedImage(images.alien, 39, 72, 500));
         this.obstacleImages.push(new AnimatedImage(images.meteor, 216, 104, 500));

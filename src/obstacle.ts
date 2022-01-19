@@ -1,10 +1,11 @@
 class Obstacle extends MovingObject {
-    constructor(gameManager: GameManager, image: AnimatedImage, x: number, y: number, speed: number, angle?: number) {
-        super(gameManager, image, x, y, image.width, image.height, speed, angle);
-    }
+    // constructor(gameManager: GameManager, image: AnimatedImage, x: number, y: number, speed: number, angle?: number) {
+    // constructor(gameManager: GameManager, x: number, y: number, speed: number, angle?: number) {
+    //     super(gameManager, image, x, y, image.width, image.height, speed, angle);
+    // }
 
     draw() {
-        this.image.draw(this.gameManager.window.x + this.x, this.gameManager.window.y + this.y);
+        // this.image.draw(this.gameManager.window.x + this.x, this.gameManager.window.y + this.y);
         this.fadeInObstacle();
     }
  

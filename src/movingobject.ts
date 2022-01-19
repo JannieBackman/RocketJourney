@@ -1,17 +1,19 @@
 class MovingObject {
     gameManager: GameManager;
-    image: AnimatedImage;
+    // image: AnimatedImage;
 
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    speed: number;
-	angle: number;
+    public x: number;
+    public y: number;
+    public width: number;
+    public height: number;
+    private speed: number;
+    private angle: number;
+    protected timeCounter: number;
 
-    constructor(gameManager: GameManager, image: AnimatedImage, x: number, y: number, width: number, height: number, speed: number, angle?: number) {
+    constructor(gameManager: GameManager, x: number, y: number, width: number, height: number, speed: number, angle?: number) {
+    // constructor(gameManager: GameManager, image: AnimatedImage, x: number, y: number, width: number, height: number, speed: number, angle?: number) {
         this.gameManager = gameManager;
-        this.image = image;
+        // this.image = image;
 
         this.x = x;
         this.y = y;
@@ -19,10 +21,12 @@ class MovingObject {
         this.height = height;
         this.speed = speed;
 		this.angle = angle ?? 0;
+        this.timeCounter = 0;
     }
 
     draw() {
-        this.image.draw(this.x, this.y);
+        // this.image.draw(this.x, this.y);
+        this.timeCounter += deltaTime; 
     }
 
     moveUp() {
