@@ -1,4 +1,5 @@
 interface IScene {
-    preload(): void;
-    render(): void;
+	setup(): void;
+	update?(): void;
+    draw(): void;
 } 

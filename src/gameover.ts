@@ -1,49 +1,21 @@
 /// <reference path="iscene.ts" />
 
 class GameOverMenu implements IScene {
-
     gameManager: GameManager;
+    gameOverText?: AnimatedImage;
+    restartText?: AnimatedImage; 
+    quitText?: AnimatedImage;
 
-    get p5() {
-        return this.gameManager.p5;
-    }
+	setup() {
+		this.gameOverText = new AnimatedImage(images.gameOver, images.gameOver.width, images.gameOver.height);
+		this.restartText = new AnimatedImage(images.restart, images.restart.width, images.restart.height);
+		this.quitText = new AnimatedImage(images.quit, images.quit.width, images.quit.height);
+	}
 
-
-    gameOverSprite?: Sprite;
-    restartSprite?: Sprite; 
-    quitSprite?: Sprite;
-   
-
-
-    preload() {
-        let gameOverImage = this.p5.loadImage('/assets/images/game-over.svg', () => {
-            this.gameOverSprite = new Sprite(this.gameManager, gameOverImage, gameOverImage.width, gameOverImage.height);
-        });
-
-        let restartImage = this.p5.loadImage('/assets/images/restart.svg',() => {
-            this.restartSprite = new Sprite(this.gameManager, restartImage, restartImage.width, restartImage.height);
-        });
-
-        let quitImage = this.p5.loadImage('/assets/images/quit.svg',() => {
-            this.quitSprite = new Sprite(this.gameManager, quitImage, quitImage.width, quitImage.height);
-        });
-
-
-
-
-    }
-
-    render() {
-        if (this.gameOverSprite === undefined) {
-            return;
-        }
-
-        this.gameOverSprite.render(this.gameManager.window.x + this.gameManager.window.width / 2 - this.gameOverSprite.frames[0].width / 2, this.gameManager.window.y + 175);
-        this.restartSprite?.render(this.gameManager.window.x + this.gameManager.window.width / 2 - this.restartSprite.frames[0].width / 2, this.gameManager.window.y + 325);
-        this.quitSprite?.render(this.gameManager.window.x + this.gameManager.window.width / 2 - this.quitSprite.frames[0].width / 2, this.gameManager.window.y + 375);
-        
-        
-
+    draw() {
+        this.gameOverText?.draw(this.gameManager.window.x + this.gameManager.window.width / 2 - this.gameOverText.frames[0].width / 2, this.gameManager.window.y + 175);
+        this.restartText?.draw(this.gameManager.window.x + this.gameManager.window.width / 2 - this.restartText.frames[0].width / 2, this.gameManager.window.y + 325);
+        this.quitText?.draw(this.gameManager.window.x + this.gameManager.window.width / 2 - this.quitText.frames[0].width / 2, this.gameManager.window.y + 375);    
     }
 
     constructor(gameManager: GameManager) {

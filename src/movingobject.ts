@@ -1,27 +1,28 @@
 class MovingObject {
     gameManager: GameManager;
-    scene: IScene;
-
-    get p5() {
-        return this.gameManager.p5;
-    }
+    image: AnimatedImage;
 
     x: number;
     y: number;
     width: number;
     height: number;
     speed: number;
+	angle: number;
 
-    constructor(gameManager: GameManager, scene: IScene, x: number, y: number, width: number, height: number, speed: number) {
+    constructor(gameManager: GameManager, image: AnimatedImage, x: number, y: number, width: number, height: number, speed: number, angle?: number) {
         this.gameManager = gameManager;
-        this.scene = scene;
+        this.image = image;
 
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.speed = speed;
-        // this.timeCounter = 0;
+		this.angle = angle ?? 0;
+    }
+
+    draw() {
+        this.image.draw(this.x, this.y);
     }
 
     moveUp() {
