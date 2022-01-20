@@ -13,7 +13,8 @@ interface GameWindow {
 class GameManager {
     window: GameWindow = { width: 800, height: 600, x: 0, y: 0 };
 
-    backgroundImage?: AnimatedImage;
+    backgroundImage?: p5.Image;
+    backgroundImageTimeCounter: number;
 
     startMenuScene: IScene = new StartMenu(this);
     gameScene: Game = new Game(this);
@@ -23,11 +24,10 @@ class GameManager {
 
     movingObjects: MovingObject[] = [];
 
-    /*
-    function createMovingObject(frames: p5.Image[] | p5.Image, width: number, height: number, interval?: number) {
-    	
+    constructor() {
+        this.backgroundImageTimeCounter = 0;
     }
-    */
+
 
     setScene(scene: IScene) {
         this.scene = scene;
@@ -37,14 +37,26 @@ class GameManager {
     }
 
     setup() {
-        this.backgroundImage = new AnimatedImage(images.background, this.window.width, this.window.height, 250);
-        this.scene.setup();
+        if (this.scene.setup !== undefined) {
+            this.scene.setup
+        }
     }
 
     draw() {
-        background('rgb(0, 4, 10)');
+        this.backgroundImageTimeCounter += deltaTime;
+        console.log(this.backgroundImageTimeCounter)
+        let i;
+        if (this.backgroundImageTimeCounter < 300) {
+            i = 2;
+        } else if (this.backgroundImageTimeCounter < 600) {
+            i = 0;
+        } else {
+            i = 1;
+        } image(images.background[i], 0, 0, this.window.width, this.window.height)
+        if (this.backgroundImageTimeCounter >= 900) {
+            this.backgroundImageTimeCounter = 0;
+        }
 
-        this.backgroundImage?.draw(this.window.x, this.window.y);
         this.scene.draw();
     }
 
