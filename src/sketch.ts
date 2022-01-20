@@ -17,7 +17,8 @@ interface Images {
 	superman: p5.Image[]
 	gameOver: p5.Image,
 	restart: p5.Image,
-	quit: p5.Image
+	quit: p5.Image,
+	scoreBoard: p5.Image
 }
 
 let gameManager: GameManager = new GameManager();
@@ -75,7 +76,8 @@ function preload() {
 		],
 		gameOver: loadImage('/assets/images/game-over.svg'),
 		restart: loadImage('/assets/images/restart.svg'),
-		quit: loadImage('/assets/images/quit.svg')
+		quit: loadImage('/assets/images/quit.svg'),
+		scoreBoard: loadImage('/assets/images/scoreboard.svg')
 	};
 }
 
