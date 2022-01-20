@@ -1,15 +1,21 @@
 class Obstacle extends MovingObject {
-    constructor(gameManager: GameManager, image: AnimatedImage, x: number, y: number, speed: number, angle?: number) {
-        super(gameManager, image, x, y, image.width, image.height, speed, angle);
-    }
 
-    draw() {
-        this.image.draw(this.gameManager.window.x + this.x, this.gameManager.window.y + this.y);
+    public draw() {
+        this.update();
         this.fadeInObstacle();
+
+        let i; 
+        if (this.animationTimeCounter < 500) {
+            i = 0; 
+        } else {
+            i = 1;
+        } image(this.images[i], this.x, this.y, this.width, this.height)
+        if (this.animationTimeCounter >= 1000) {
+            this.animationTimeCounter = 0;
+        }
     }
  
-    fadeInObstacle() { 
-        // this.x = this.x - this.speed;
-        this.x = this.x - 5;  // just for testing now, will be changed back to this.speed
+    protected fadeInObstacle() { 
+        this.x = this.x - this.speed; 
     }
 }

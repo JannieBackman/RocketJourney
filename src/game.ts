@@ -4,39 +4,44 @@ class Game implements IScene {
 
     rocket?: Rocket;
     obstacle?: Obstacle;
-    rocketImage?: AnimatedImage;
-    obstacleImages: AnimatedImage[] = [];
+    rocketImage?: p5.Image;
+    obstacleData: object[] = [];
     obstacles: Obstacle[] = [];
     timeCounter: number;
-
-	// physicsEngine : PhysicsEngine = new PhysicsEngine();
+    speedDuration: number;
 
     constructor(gameManager: GameManager) {
         this.gameManager = gameManager;
         this.timeCounter = 0;
+        this.speedDuration = 0;
     }
 
-	setup() {
-		this.rocketImage = new AnimatedImage(images.rocket, 115, 63, 500);
-		this.rocket = new Rocket(this.gameManager, this.rocketImage, 10, (this.gameManager.window.height - this.rocketImage.height) / 2, this.rocketImage.width, this.rocketImage.height, 5);
+	public setup() {
+        this.rocket = new Rocket(this.gameManager, images.rocket, 10, (this.gameManager.window.height - 115) /2, 115, 63, 5)
 
-        this.obstacleImages.push(new AnimatedImage(images.jellyFish, 69, 42, 500));
-        this.obstacleImages.push(new AnimatedImage(images.alien, 39, 72, 500));
-        this.obstacleImages.push(new AnimatedImage(images.meteor, 216, 104, 500));
-        this.obstacleImages.push(new AnimatedImage(images.octopus, 66, 57, 500));
-        this.obstacleImages.push(new AnimatedImage(images.palien, 58, 62, 500));
-        this.obstacleImages.push(new AnimatedImage(images.saturn, 129, 81, 500));
-        this.obstacleImages.push(new AnimatedImage(images.star, 42, 42, 500));
-        this.obstacleImages.push(new AnimatedImage(images.planet, 58, 50, 500));
-        this.obstacleImages.push(new AnimatedImage(images.superman, 120, 62, 500));
-		// this.physicsEngine.start();
+        this.obstacleData.push({image: images.jellyFish, width: 69, height: 42, speed: 3});
+        this.obstacleData.push({image: images.alien, width: 39, height: 72, speed: 3});
+        this.obstacleData.push({image: images.meteor, width: 216, height: 104, speed: 3});
+        this.obstacleData.push({image: images.octopus, width: 66, height: 57, speed: 3});
+        this.obstacleData.push({image: images.palien, width: 58, height: 62, speed: 3});
+        this.obstacleData.push({image: images.saturn, width: 129, height: 81, speed: 3});
+        this.obstacleData.push({image: images.star, width: 42, height: 42, speed: 3});
+        this.obstacleData.push({image: images.planet, width: 58, height: 50, speed: 3});
+        this.obstacleData.push({image: images.superman, width: 120, height: 62, speed: 3});
 	}
 
-	update() {
+	public update() {
+        this.speedDuration += deltaTime;
+        if (this.speedDuration >= 8000) {
+            for (let i = 0; i < this.obstacles.length; i++) {
+                this.obstacles[i].increaseSpeed();
+                this.speedDuration = 0;
+            }
+        }
 	}
 
-    draw() {
-        this.rocket?.display();
+    public draw() {
+        this.rocket?.draw();
 
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].draw();
@@ -49,14 +54,11 @@ class Game implements IScene {
         }
     }
 
-    createObstacle() {
-        let randomImage: AnimatedImage = random(this.obstacleImages);
-        let yPos = random(-20, this.gameManager.window.height - randomImage.height + 20);
-        let xPos = this.gameManager.window.width - randomImage.width;
-        this.obstacles.push(new Obstacle(this.gameManager, randomImage, xPos, yPos, 200, random(200,160)));
-
-		// let obstacle = new Obstacle(this.gameManager, randomImage, xPos, yPos, 200, random(200,160));
-        // this.obstacles.push(obstacle);
-		// this.physicsEngine.addObject(obstacle);
+    private createObstacle() {
+        let obstacleData: any = {}
+        obstacleData = random(this.obstacleData);
+        let yPos: number = random(-10, this.gameManager.window.height - obstacleData.height + 10);
+        let xPos: number = this.gameManager.window.width ;
+        this.obstacles.push(new Obstacle(this.gameManager, obstacleData.image, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200,160)));
     }
 }
