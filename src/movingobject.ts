@@ -1,5 +1,4 @@
 class MovingObject {
-    gameManager: GameManager;
     // image: AnimatedImage;
 
     protected x: number;
@@ -11,8 +10,7 @@ class MovingObject {
     protected animationTimeCounter: number;
     protected images: p5.Image[] = []; 
 
-    constructor(gameManager: GameManager, images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, angle?: number) {
-        this.gameManager = gameManager;
+    constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, angle?: number) {
         this.images = images; 
         this.x = x;
         this.y = y;
@@ -40,8 +38,8 @@ class MovingObject {
 
     protected moveDown() {
         this.y += this.speed;
-        if (this.y > this.gameManager.window.height - this.height) {
-            this.y = this.gameManager.window.height - this.height;
+        if (this.y > height - this.height) {
+            this.y = height - this.height;
         }
     }
     
@@ -63,9 +61,12 @@ class MovingObject {
   
     protected moveToStart() {
         this.x += this.speed * .5;
-        if (this.x > (this.gameManager.window.width - this.width) / 3) {
-            this.x = (this.gameManager.window.width - this.width) / 3 ;
+        if (this.x > (width - this.width) / 3) {
+            this.x = (width - this.width) / 3 ;
         }
     }
 
+    public draw() {
+
+    }
 }

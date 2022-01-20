@@ -1,66 +1,61 @@
 /// <reference path="iscene.ts" />
-class Game implements IScene {
-    gameManager: GameManager;
+class Game {
+    private gameManager: GameManager;
+    private startMenuScene: IScene;
+    private gameOverScene: IScene;
+    private scoreBoardScene: IScene;
+    private scene: IScene;
+    private backgroundImageTimeCounter: number;
 
-    rocket?: Rocket;
-    obstacle?: Obstacle;
-    rocketImage?: p5.Image;
-    obstacleData: object[] = [];
-    obstacles: Obstacle[] = [];
-    timeCounter: number;
-    speedDuration: number;
+    constructor() {
+        this.gameManager = new GameManager();
+        this.startMenuScene = new StartMenu(this);
+        this.gameOverScene = new GameOverMenu(this);
+        this.scoreBoardScene = new ScoreBoard(this);
+        this.scene = this.startMenuScene;
 
-    constructor(gameManager: GameManager) {
-        this.gameManager = gameManager;
-        this.timeCounter = 0;
-        this.speedDuration = 0;
+        this.backgroundImageTimeCounter = 0;
+    }
+    
+    private keyPressed() {
+        if (keyCode === 32) {
+            this.setScene(this.gameScene);
+        } console.log(keyCode)
+        //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
+        if (keyIsDown(ENTER)) {
+            this.setScene(this.gameOverScene);
+        }
+        // Så man kan se scoreboard-sidan
+        if (keyIsDown(BACKSPACE)) {
+            this.setScene(this.scoreBoardScene);
+        }
+        if (keyCode === ESCAPE) {
+
+            this.setScene(this.startMenuScene);
+
+        }
     }
 
-	public setup() {
-        this.rocket = new Rocket(this.gameManager, images.rocket, 10, (this.gameManager.window.height - 115) /2, 115, 63, 5)
-
-        this.obstacleData.push({image: images.jellyFish, width: 69, height: 42, speed: 3});
-        this.obstacleData.push({image: images.alien, width: 39, height: 72, speed: 3});
-        this.obstacleData.push({image: images.meteor, width: 216, height: 104, speed: 3});
-        this.obstacleData.push({image: images.octopus, width: 66, height: 57, speed: 3});
-        this.obstacleData.push({image: images.palien, width: 58, height: 62, speed: 3});
-        this.obstacleData.push({image: images.saturn, width: 129, height: 81, speed: 3});
-        this.obstacleData.push({image: images.star, width: 42, height: 42, speed: 3});
-        this.obstacleData.push({image: images.planet, width: 58, height: 50, speed: 3});
-        this.obstacleData.push({image: images.superman, width: 120, height: 62, speed: 3});
-	}
-
 	public update() {
-        this.speedDuration += deltaTime;
-        if (this.speedDuration >= 8000) {
-            for (let i = 0; i < this.obstacles.length; i++) {
-                this.obstacles[i].increaseSpeed();
-                this.speedDuration = 0;
-            }
-        }
+        this.gameManager.update();
 	}
 
     public draw() {
-        this.rocket?.draw();
+        background('rgb(0, 4, 10)');
 
-        for (let i = 0; i < this.obstacles.length; i++) {
-            this.obstacles[i].draw();
+        // added all these lines below (46-58)
+        this.backgroundImageTimeCounter += deltaTime;
+        let i; 
+        if (this.backgroundImageTimeCounter < 300) {
+            i = 2; 
+        } else if (this.backgroundImageTimeCounter < 600) {
+            i = 0;
+        } else {
+            i = 1;
+        } image(images.background[i], 0, 0, width, height)
+        if (this.backgroundImageTimeCounter >= 900) {
+            this.backgroundImageTimeCounter = 0;
         }
-
-        setTimeout(() => {
-            this.timeCounter += deltaTime;
-            if (this.timeCounter >= 1500) {
-                this.createObstacle(); 
-                this.timeCounter = 0;
-            }
-        }, 3000);
-    }
-
-    private createObstacle() {
-        let obstacleData: any = {}
-        obstacleData = random(this.obstacleData);
-        let yPos: number = random(-10, this.gameManager.window.height - obstacleData.height + 10);
-        let xPos: number = this.gameManager.window.width ;
-        this.obstacles.push(new Obstacle(this.gameManager, obstacleData.image, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200,160)));
+        this.gameManager.draw();
     }
 }
