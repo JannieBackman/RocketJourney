@@ -63,8 +63,8 @@ class MovingObject {
   
     protected moveToStart() {
         this.x += this.speed * .5;
-        if (this.x > this.gameManager.window.width - 600) {
-            this.x = this.gameManager.window.width - 600 ;
+        if (this.x > (this.gameManager.window.width - this.width) / 3) {
+            this.x = (this.gameManager.window.width - this.width) / 3 ;
         }
     }
 

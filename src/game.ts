@@ -47,11 +47,13 @@ class Game implements IScene {
             this.obstacles[i].draw();
         }
 
-        this.timeCounter += deltaTime;
-        if (this.timeCounter >= 1500) {
-            this.createObstacle(); 
-            this.timeCounter = 0;
-        }
+        setTimeout(() => {
+            this.timeCounter += deltaTime;
+            if (this.timeCounter >= 1500) {
+                this.createObstacle(); 
+                this.timeCounter = 0;
+            }
+        }, 3000);
     }
 
     private createObstacle() {
