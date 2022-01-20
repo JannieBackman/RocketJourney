@@ -21,31 +21,31 @@ class GameManager {
     scoreBoardScene: IScene = new ScoreBoard(this);
     scene: IScene = this.startMenuScene;
 
-	movingObjects: MovingObject[] = [];
+    movingObjects: MovingObject[] = [];
 
-	/*
-	function createMovingObject(frames: p5.Image[] | p5.Image, width: number, height: number, interval?: number) {
-		
-	}
-	*/
+    /*
+    function createMovingObject(frames: p5.Image[] | p5.Image, width: number, height: number, interval?: number) {
+    	
+    }
+    */
 
     setScene(scene: IScene) {
         this.scene = scene;
-		if(this.scene.setup !== undefined) {
-			this.scene.setup();
-		}
+        if (this.scene.setup !== undefined) {
+            this.scene.setup();
+        }
     }
 
     setup() {
-		this.backgroundImage = new AnimatedImage(images.background, this.window.width, this.window.height, 250);
-		this.scene.setup();
+        this.backgroundImage = new AnimatedImage(images.background, this.window.width, this.window.height, 250);
+        this.scene.setup();
     }
 
     draw() {
         background('rgb(0, 4, 10)');
 
         this.backgroundImage?.draw(this.window.x, this.window.y);
-		this.scene.draw();
+        this.scene.draw();
     }
 
     keyPressed() {
@@ -57,13 +57,13 @@ class GameManager {
             this.setScene(this.gameOverScene);
         }
         // Så man kan se scoreboard-sidan
-        if (keyCode === 8) {
+        if (keyIsDown(BACKSPACE)) {
             this.setScene(this.scoreBoardScene);
         }
-    }
-}
-        if (keyIsDown(ESCAPE)) {
+        if (keyCode === ESCAPE) {
+
             this.setScene(this.startMenuScene);
+
         }
-    }   
+    }
 } 
