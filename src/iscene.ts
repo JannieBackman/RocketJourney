@@ -1,5 +1,5 @@
 interface IScene {
-	setup(): void;
+	setup?(): void;
 	update?(): void;
     draw(): void;
-} 
+}
