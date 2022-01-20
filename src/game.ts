@@ -30,9 +30,7 @@ class Game {
             this.setScene(this.scoreBoardScene);
         }
         if (keyCode === ESCAPE) {
-
             this.setScene(this.startMenuScene);
-
         }
     }
 

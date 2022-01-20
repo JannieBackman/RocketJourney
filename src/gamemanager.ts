@@ -20,7 +20,6 @@ class GameManager {
 
         this.timeCounter = 0;
         this.speedDuration = 0;
-
         this.obstacles = [];
         this.obstacleData = [
             {image: images.jellyFish, width: 69, height: 42, speed: 3},
