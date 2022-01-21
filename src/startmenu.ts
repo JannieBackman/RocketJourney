@@ -11,9 +11,8 @@ class StartMenu {
     }
 
     draw() {
-        console.log('called')
-        image(images.logo, windowWidth / 2 - images.logo.width / 2, windowHeight / 2 + 100)
-        image(images.upAndDown, windowWidth / 2 - images.upAndDown.width / 2, windowHeight + 375)
+        image(images.logo, (images.background[0].width / 20 - images.logo.width / 2), 200)
+        image(images.upAndDown, (images.background[0].width / 20 -  images.upAndDown.width / 2), 450)
 
         this.textBlinkTimer += deltaTime;
         let i; 
@@ -21,7 +20,7 @@ class StartMenu {
             i = 0; 
         } else {
             i = 1;
-        } image(images.start[i], (windowWidth - images.start[i].width) / 2, windowHeight + 245, images.start[i].width, images.start[i].height)
+        } image(images.start[i], (images.background[0].width / 20 - images.start[i].width / 2), 290)
         if (this.textBlinkTimer >= 600) {
             this.textBlinkTimer = 0;
         }

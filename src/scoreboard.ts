@@ -7,6 +7,6 @@ class ScoreBoard {
     }
     
     draw() {
-        image(images.scoreBoard, windowWidth / 2 - images.scoreBoard.width / 2, windowHeight + 75);
+        image(images.scoreBoard, (images.background[0].width / 20 - images.scoreBoard.width / 2), (images.background[0].height / 20 - images.scoreBoard.height / 2),);
     }
 }
