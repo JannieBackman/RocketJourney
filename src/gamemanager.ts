@@ -1,8 +1,3 @@
-/// <reference path="iscene.ts" />
-/// <reference path="startmenu.ts" />
-/// <reference path="game.ts" />
-/// <reference path="gameover.ts" />
-
 interface GameWindow {
     width: number;
     height: number;
@@ -11,71 +6,71 @@ interface GameWindow {
 }
 
 class GameManager {
-    window: GameWindow = { width: 800, height: 600, x: 0, y: 0 };
-
-    backgroundImage?: p5.Image;
-    backgroundImageTimeCounter: number;
-
-    startMenuScene: IScene = new StartMenu(this);
-    gameScene: Game = new Game(this);
-    gameOverScene: IScene = new GameOverMenu(this);
-    scoreBoardScene: IScene = new ScoreBoard(this);
-    scene: IScene = this.startMenuScene;
-
-    movingObjects: MovingObject[] = [];
+    private movingObjects: MovingObject[];
+    private rocket: Rocket;
+    private obstacleData: object[]
+    private obstacles: Obstacle[]
+    private timeCounter: number;
+    private speedDuration: number;
+    private isIntroSequence: boolean;
 
     constructor() {
-        this.backgroundImageTimeCounter = 0;
+        this.movingObjects = [];
+        this.rocket = new Rocket(images.rocket, 10, (height - 115) /2, 115, 63, 5)
+
+        this.timeCounter = 0;
+        this.speedDuration = 0;
+        this.obstacles = [];
+        this.obstacleData = [
+            {image: images.jellyFish, width: 69, height: 42, speed: 3},
+            {image: images.alien, width: 39, height: 72, speed: 3},
+            {image: images.meteor, width: 216, height: 104, speed: 3},
+            {image: images.octopus, width: 66, height: 57, speed: 3},
+            {image: images.palien, width: 58, height: 62, speed: 3},
+            {image: images.saturn, width: 129, height: 81, speed: 3},
+            {image: images.star, width: 42, height: 42, speed: 3},
+            {image: images.planet, width: 58, height: 50, speed: 3},
+            {image: images.superman, width: 120, height: 62, speed: 3},
+        ];
+        this.isIntroSequence = true;
+        setTimeout(() => this.isIntroSequence = false, 3000)
     }
 
+    public update() {
+        this.speedDuration += deltaTime;
+        if (this.speedDuration >= 8000) {
+            for (let i = 0; i < this.obstacles.length; i++) {
+                this.obstacles[i].increaseSpeed();
+                this.speedDuration = 0;
+            }
+        }
 
-    setScene(scene: IScene) {
-        this.scene = scene;
-        if (this.scene.setup !== undefined) {
-            this.scene.setup();
+        if (!this.isIntroSequence) {
+            this.timeCounter += deltaTime;
+            if (this.timeCounter >= 1500) {
+                this.createObstacle(); 
+                this.timeCounter = 0;
+            }
+        }
+
+        this.rocket.update();
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].update();
         }
     }
 
-    setup() {
-        if (this.scene.setup !== undefined) {
-            this.scene.setup
-        }
+    private createObstacle() {
+        let obstacleData: any = {}
+        obstacleData = random(this.obstacleData);
+        let yPos = random(-10, height - obstacleData.height + 10);
+        let xPos = width;
+        this.obstacles.push(new Obstacle(obstacleData.image, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200,160)));
     }
 
-    draw() {
-        this.backgroundImageTimeCounter += deltaTime;
-        console.log(this.backgroundImageTimeCounter)
-        let i;
-        if (this.backgroundImageTimeCounter < 300) {
-            i = 2;
-        } else if (this.backgroundImageTimeCounter < 600) {
-            i = 0;
-        } else {
-            i = 1;
-        } image(images.background[i], 0, 0, this.window.width, this.window.height)
-        if (this.backgroundImageTimeCounter >= 900) {
-            this.backgroundImageTimeCounter = 0;
-        }
-
-        this.scene.draw();
-    }
-
-    keyPressed() {
-        if (keyCode === 32) {
-            this.setScene(this.gameScene);
-        } console.log(keyCode)
-        //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
-        if (keyIsDown(ENTER)) {
-            this.setScene(this.gameOverScene);
-        }
-        // Så man kan se scoreboard-sidan
-        if (keyIsDown(BACKSPACE)) {
-            this.setScene(this.scoreBoardScene);
-        }
-        if (keyCode === ESCAPE) {
-
-            this.setScene(this.startMenuScene);
-
+    public draw() {
+        this.rocket.draw();
+        for (let i = 0; i < this.obstacles.length; i++) {
+            this.obstacles[i].draw();
         }
     }
 } 
