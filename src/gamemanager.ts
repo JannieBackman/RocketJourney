@@ -1,3 +1,4 @@
+
 interface GameWindow {
     width: number;
     height: number;
@@ -13,10 +14,12 @@ class GameManager {
     private timeCounter: number;
     private speedDuration: number;
     private isIntroSequence: boolean;
+    private scoreBoard: ScoreBoard;
 
     constructor() {
         this.movingObjects = [];
         this.rocket = new Rocket(images.rocket, 10, (height - 115) /2, 115, 63, 5)
+        this.scoreBoard = new ScoreBoard(this);
 
         this.timeCounter = 0;
         this.speedDuration = 0;
@@ -72,5 +75,6 @@ class GameManager {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].draw();
         }
+        this.scoreBoard.draw();
     }
 } 
