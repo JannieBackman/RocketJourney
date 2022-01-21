@@ -1,3 +1,4 @@
+let isBehindRocket: Boolean;
 class Obstacle extends MovingObject {
 
     public draw() {

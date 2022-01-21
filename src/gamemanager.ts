@@ -75,6 +75,17 @@ class GameManager {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].draw();
         }
+
+        for (let i = 0; i < this.obstacles.length; i++) {
+        if (this.obstacles[i].x == 242) {
+            console.log(this.obstacles[i])
+            isBehindRocket = true;
+            score += 10;
+        } else {
+            isBehindRocket = false;
+        }
+
         this.scoreBoard.draw();
     }
 } 
+}

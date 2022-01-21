@@ -1,11 +1,13 @@
+let score: number;
+score = 0;
 class ScoreBoard {
     gameManager: GameManager;
 
     constructor(gameManager: GameManager) {
         this.gameManager = gameManager;
         textFont(font);
-        textSize(fontsize);
-        textAlign(RIGHT, TOP);
+        textSize(20);
+        textAlign(RIGHT);
     }
 
     draw() {
@@ -13,9 +15,19 @@ class ScoreBoard {
     }
 
     private printScore() {
-        let score: Number;
-        score = 9999999
         fill(255);
-        text('SCORE ' + score, 790, 25);
+        text('SCORE ' + score, 800, 25);
+    }
+
+    private showCurrentScore() {
+
+    }
+
+    private showBestScore() {
+
+    }
+
+    private filterBestScore() {
+
     }
 }

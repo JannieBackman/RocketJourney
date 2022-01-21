@@ -1,7 +1,6 @@
 interface Images {
 	background: p5.Image[],
 	logo: p5.Image,
-	start: p5.Image[],
 	upAndDown: p5.Image,
 	rocket: p5.Image[],
 	jellyFish: p5.Image[],
@@ -21,8 +20,7 @@ interface Images {
 
 let game: Game;
 let images: Images;
-let font: p5.Font,
-    fontsize = 20;
+let font: p5.Font;
 
 function preload() {
 	images = {
@@ -32,10 +30,6 @@ function preload() {
 			loadImage('/assets/images/background-1.svg')
 		],
 		logo: loadImage('/assets/images/Rocket-Journey.svg'),
-		start: [
-			loadImage('/assets/images/start-game-1.svg'),
-			loadImage('/assets/images/start-game-2.svg')
-		],
 		upAndDown: loadImage('/assets/images/up-down.svg'),
 		rocket: [
 			loadImage('/assets/images/rocket-1.svg'),

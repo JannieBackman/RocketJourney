@@ -1,5 +1,5 @@
 class MovingObject {
-    protected x: number;
+    public x: number;
     protected y: number;
     protected width: number;
     protected height: number;

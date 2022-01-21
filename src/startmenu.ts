@@ -1,7 +1,6 @@
 class StartMenu {
     game: Game;
     logo?: p5.Image;
-    startText?: p5.Image;
     upAndDown?: p5.Image;
     textBlinkTimer: number;
     
@@ -15,12 +14,12 @@ class StartMenu {
         image(images.upAndDown, (images.background[0].width / 20 -  images.upAndDown.width / 2), 450)
 
         this.textBlinkTimer += deltaTime;
-        let i; 
+        textSize(18);
         if (this.textBlinkTimer < 300) {
-            i = 0; 
+            fill(255); 
         } else {
-            i = 1;
-        } image(images.start[i], (images.background[0].width / 20 - images.start[i].width / 2), 290)
+            fill(150);
+        } text('PRESS SPACE TO START', 580, 290)
         if (this.textBlinkTimer >= 600) {
             this.textBlinkTimer = 0;
         }
