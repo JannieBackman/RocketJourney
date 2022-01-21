@@ -1,6 +1,4 @@
 class MovingObject {
-    // image: AnimatedImage;
-
     protected x: number;
     protected y: number;
     protected width: number;

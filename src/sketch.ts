@@ -21,6 +21,8 @@ interface Images {
 
 let game: Game;
 let images: Images;
+let font: p5.Font,
+    fontsize = 20;
 
 function preload() {
 	images = {
@@ -81,8 +83,9 @@ function preload() {
 			loadImage('/assets/images/restart-2.svg')
 		],
 		quit: loadImage('/assets/images/quit.svg'),
-		leaderBoard: loadImage('/assets/images/leaderboard.svg')
+		leaderBoard: loadImage('/assets/images/leaderboard.svg'), 
 	};
+	font = loadFont('/assets/font/PressStart2P-Regular.ttf'); 
 }
 
 function setup() {
