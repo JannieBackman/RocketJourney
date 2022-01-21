@@ -88,12 +88,12 @@ function preload() {
 function setup() {
 	createCanvas(800, 600);
 	frameRate(30);
-	gameManager.setup();
+	game = new Game;
 }
 
 function update() {
-	if (gameManager.scene.update !== undefined) {
-		gameManager.scene.update();
+	if (game.scene.update !== undefined) {
+	 	game.scene.update();
 	}
 }
 
