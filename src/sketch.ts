@@ -16,7 +16,7 @@ interface Images {
 	gameOver: p5.Image,
 	restart: p5.Image[],
 	quit: p5.Image,
-	scoreBoard: p5.Image
+	leaderBoard: p5.Image
 }
 
 let game: Game;
@@ -81,7 +81,7 @@ function preload() {
 			loadImage('/assets/images/restart-2.svg')
 		],
 		quit: loadImage('/assets/images/quit.svg'),
-		scoreBoard: loadImage('/assets/images/scoreboard.svg')
+		leaderBoard: loadImage('/assets/images/leaderboard.svg')
 	};
 }
 
