@@ -1,17 +1,16 @@
-/// <reference path="iscene.ts" />
 class Game {
     private gameManager: GameManager;
     private startMenuScene: IScene;
     private gameOverScene: IScene;
     private scoreBoardScene: IScene;
-    private scene: IScene;
+    public scene: IScene;
     private backgroundImageTimeCounter: number;
 
     constructor() {
         this.gameManager = new GameManager();
-        this.startMenuScene = new StartMenu(this);
-        this.gameOverScene = new GameOverMenu(this);
-        this.scoreBoardScene = new ScoreBoard(this);
+        this.startMenuScene = new StartMenu(this.gameManager);
+        this.gameOverScene = new GameOverMenu(this.gameManager);
+        this.scoreBoardScene = new ScoreBoard(this.gameManager);
         this.scene = this.startMenuScene;
 
         this.backgroundImageTimeCounter = 0;
@@ -41,7 +40,6 @@ class Game {
     public draw() {
         background('rgb(0, 4, 10)');
 
-        // added all these lines below (46-58)
         this.backgroundImageTimeCounter += deltaTime;
         let i; 
         if (this.backgroundImageTimeCounter < 300) {

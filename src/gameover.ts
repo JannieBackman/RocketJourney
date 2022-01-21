@@ -13,8 +13,8 @@ class GameOverMenu implements IScene {
     }
 
     draw() {
-        image(images.gameOver, this.gameManager.window.x + windowWidth / 2 - images.gameOver.width / 2, this.gameManager.window.y + 175)
-        image(images.quit, this.gameManager.window.x + windowWidth / 2 - images.quit.width / 2, this.gameManager.window.y + 375)
+        image(images.gameOver, (windowWidth - images.gameOver.width) / 2, this.gameManager.window.y + 175)
+        image(images.quit, windowWidth / 2 - images.quit.width / 2, this.gameManager.window.y + 375)
 
         this.textBlinkTimer += deltaTime;
         let i; 
