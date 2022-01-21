@@ -6,7 +6,7 @@ class Game {
     private gameManager: GameManager;
     private startMenuScene: StartMenu;
     private gameOverScene: GameOverMenu;
-    private scoreBoardScene: ScoreBoard; 
+    //private scoreBoardScene: ScoreBoard;
     // public scene: XXXXXXX;
     private backgroundImageTimeCounter: number;
 
@@ -14,12 +14,12 @@ class Game {
         this.gameManager = new GameManager();
         this.startMenuScene = new StartMenu(this);
         this.gameOverScene = new GameOverMenu(this);
-        this.scoreBoardScene = new ScoreBoard(this.gameManager);
+        //this.scoreBoardScene = new ScoreBoard(this.gameManager);
         // this.scene = this.startMenuScene;
 
         this.backgroundImageTimeCounter = 0;
     }
-    
+
     private keyPressed() {
         if (keyCode === 32) {
             isRunning = true;
@@ -39,18 +39,18 @@ class Game {
     //     }
     // 
 
-	public update() {
+    public update() {
         this.gameManager.update();
         this.keyPressed();
-	}
+    }
 
     public draw() {
         background('rgb(0, 4, 10)');
 
         this.backgroundImageTimeCounter += deltaTime;
-        let i; 
+        let i;
         if (this.backgroundImageTimeCounter < 300) {
-            i = 2; 
+            i = 2;
         } else if (this.backgroundImageTimeCounter < 600) {
             i = 0;
         } else {
@@ -60,12 +60,12 @@ class Game {
             this.backgroundImageTimeCounter = 0;
         }
 
-        this.startMenuScene.draw(); 
         if (isRunning) {
             this.gameManager.draw();
-            this.scoreBoardScene.draw();
         } else if (isGameOver) {
             this.gameOverScene.draw();
-        } 
+        } else {
+            this.startMenuScene.draw();
+        }
     }
 } 
