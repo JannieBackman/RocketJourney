@@ -1,40 +1,47 @@
+let isStarMenu: Boolean;
+let isRunning: Boolean;
+let isGameOver: Boolean;
+
 class Game {
     private gameManager: GameManager;
-    private startMenuScene: IScene;
-    private gameOverScene: IScene;
-    private scoreBoardScene: IScene;
-    public scene: IScene;
+    private startMenuScene: StartMenu;
+    private gameOverScene: GameOverMenu;
+    private scoreBoardScene: ScoreBoard; 
+    // public scene: XXXXXXX;
     private backgroundImageTimeCounter: number;
 
     constructor() {
         this.gameManager = new GameManager();
-        this.startMenuScene = new StartMenu(this.gameManager);
-        this.gameOverScene = new GameOverMenu(this.gameManager);
+        this.startMenuScene = new StartMenu(this);
+        this.gameOverScene = new GameOverMenu(this);
         this.scoreBoardScene = new ScoreBoard(this.gameManager);
-        this.scene = this.startMenuScene;
+        // this.scene = this.startMenuScene;
 
         this.backgroundImageTimeCounter = 0;
     }
     
     private keyPressed() {
         if (keyCode === 32) {
-            this.setScene(this.gameScene);
-        } console.log(keyCode)
-        //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
-        if (keyIsDown(ENTER)) {
-            this.setScene(this.gameOverScene);
-        }
-        // Så man kan se scoreboard-sidan
-        if (keyIsDown(BACKSPACE)) {
-            this.setScene(this.scoreBoardScene);
-        }
-        if (keyCode === ESCAPE) {
-            this.setScene(this.startMenuScene);
+            isRunning = true;
         }
     }
+    //     } console.log(keyCode)
+    //     //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
+    //     if (keyIsDown(ENTER)) {
+    //         this.setScene(this.gameOverScene);
+    //     }
+    //     // Så man kan se scoreboard-sidan
+    //     if (keyIsDown(BACKSPACE)) {
+    //         scoreBoardScene();
+    //     }
+    //     if (keyCode === ESCAPE) {
+    //         startMenuScene();
+    //     }
+    // 
 
 	public update() {
         this.gameManager.update();
+        this.keyPressed();
 	}
 
     public draw() {
@@ -52,6 +59,13 @@ class Game {
         if (this.backgroundImageTimeCounter >= 900) {
             this.backgroundImageTimeCounter = 0;
         }
-        this.gameManager.draw();
+
+        this.startMenuScene.draw(); 
+        if (isRunning) {
+            this.gameManager.draw();
+            this.scoreBoardScene.draw();
+        } else if (isGameOver) {
+            this.gameOverScene.draw();
+        } 
     }
-}
+} 
