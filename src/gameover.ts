@@ -11,8 +11,8 @@ class GameOverMenu {
     }
 
     draw() {
-        image(images.gameOver, (windowWidth - images.gameOver.width) / 2, windowHeight + 175)
-        image(images.quit, windowWidth / 2 - images.quit.width / 2, windowHeight + 375)
+        image(images.gameOver, (images.background[0].width / 20 - images.gameOver.width / 2), 200)
+        image(images.quit, (images.background[0].width / 20 -  images.quit.width / 2), 335)
 
         this.textBlinkTimer += deltaTime;
         let i; 
@@ -20,7 +20,7 @@ class GameOverMenu {
             i = 0; 
         } else {
             i = 1;
-        } image(images.restart[i], (windowWidth - images.start[i].width) / 2, windowHeight + 245, images.start[i].width, images.start[i].height)
+        } image(images.restart[i], (images.background[0].width / 20 - images.restart[i].width / 2), 290)
         if (this.textBlinkTimer >= 600) {
             this.textBlinkTimer = 0;
         }
