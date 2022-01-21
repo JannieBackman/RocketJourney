@@ -23,8 +23,7 @@ class GameManager {
 
         this.timeCounter = 0;
         this.speedDuration = 0;
-        this.
-        obstacles = [];
+        this.obstacles = [];
         this.obstacleData = [
             {image: images.jellyFish, width: 69, height: 42, speed: 3},
             {image: images.alien, width: 39, height: 72, speed: 3},
@@ -76,6 +75,17 @@ class GameManager {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].draw();
         }
+
+        for (let i = 0; i < this.obstacles.length; i++) {
+        if (this.obstacles[i].x == 242) {
+            console.log(this.obstacles[i])
+            isBehindRocket = true;
+            score += 10;
+        } else {
+            isBehindRocket = false;
+        }
+
         this.scoreBoard.draw();
     }
 } 
+}
