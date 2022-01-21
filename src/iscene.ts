@@ -1,4 +1,4 @@
-interface IScene {
-	setup?(): void;
-	update?(): void;
-	draw(): void;
+// interface IScene {
+// 	setup?(): void;
+// 	update?(): void;
+// 	draw(): void;
