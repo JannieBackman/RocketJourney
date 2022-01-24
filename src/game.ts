@@ -1,43 +1,37 @@
-let isStarMenu: Boolean;
+let isStartMenu: Boolean;
 let isRunning: Boolean;
 let isGameOver: Boolean;
+
+isStartMenu = true;
+isRunning = false;
+isGameOver = false;
 
 class Game {
     private gameManager: GameManager;
     private startMenuScene: StartMenu;
     private gameOverScene: GameOverMenu;
-    //private scoreBoardScene: ScoreBoard;
-    // public scene: XXXXXXX;
     private backgroundImageTimeCounter: number;
 
     constructor() {
         this.gameManager = new GameManager();
         this.startMenuScene = new StartMenu(this);
         this.gameOverScene = new GameOverMenu(this);
-        //this.scoreBoardScene = new ScoreBoard(this.gameManager);
-        // this.scene = this.startMenuScene;
-
         this.backgroundImageTimeCounter = 0;
+        console.log(isStartMenu, isRunning, isGameOver)
     }
 
     private keyPressed() {
         if (keyCode === 32) {
             isRunning = true;
         }
+
+        if (isGameOver && keyCode === 32) {
+            isRunning = false;
+            isGameOver = false;
+            isStartMenu = true;
+            console.log('isRunning: ' + isRunning + ' isGameOver: ' + isGameOver + ' isStartMenu: ' + isStartMenu)
+        }
     }
-    //     } console.log(keyCode)
-    //     //* Endast så att vi kan se hur GameOver sidan ser ut just nu *//
-    //     if (keyIsDown(ENTER)) {
-    //         this.setScene(this.gameOverScene);
-    //     }
-    //     // Så man kan se scoreboard-sidan
-    //     if (keyIsDown(BACKSPACE)) {
-    //         scoreBoardScene();
-    //     }
-    //     if (keyCode === ESCAPE) {
-    //         startMenuScene();
-    //     }
-    // 
 
     public update() {
         this.gameManager.update();
@@ -60,11 +54,11 @@ class Game {
             this.backgroundImageTimeCounter = 0;
         }
 
-        if (isRunning) {
-            this.gameManager.draw();
-        } else if (isGameOver) {
+        if (isGameOver) {
             this.gameOverScene.draw();
-        } else {
+        } else if (isRunning) {
+            this.gameManager.draw();
+        } else if (isStartMenu) {
             this.startMenuScene.draw();
         }
     }

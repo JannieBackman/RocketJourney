@@ -15,19 +15,28 @@ class ScoreBoard {
     }
 
     private printScore() {
+        this.showCurrentScore();
+        this.showBestScore();
+    }
+
+    private showCurrentScore() {
         fill(255);
         text('SCORE ' + score, 800, 25);
     }
 
-    private showCurrentScore() {
-
-    }
-
     private showBestScore() {
-
+        // if (isGameOver) { 
+        // let scoreArray = [];
+        // scoreArray.push(score);
+        // console.log(scoreArray)
+        // }
     }
 
     private filterBestScore() {
 
+    }
+
+    public addScoreForPassingObstacle() {
+        score += 10;
     }
 }

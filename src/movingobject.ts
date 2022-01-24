@@ -1,8 +1,8 @@
 class MovingObject {
     public x: number;
-    protected y: number;
+    public y: number;
     public width: number;
-    protected height: number;
+    public height: number;
     protected speed: number;
     protected angle: number;
     protected animationTimeCounter: number;
@@ -41,22 +41,6 @@ class MovingObject {
         }
     }
 
-    /*
-    moveLeft() {
-        this.x -= this.speed;
-        if (this.x < 0) {
-            this.x = 0;
-        }
-    }
-
-    moveRight() {
-        this.x += this.speed;
-        if (this.x > this.gameManager.window.width - this.width) {
-            this.x = this.gameManager.window.width - this.width;
-        }
-    }
-    */
-
     protected moveToStart() {
         this.x += this.speed * .5;
         if (this.x > (width - this.width) / 3) {
@@ -65,6 +49,5 @@ class MovingObject {
     }
 
     public draw() {
-
     }
 }
