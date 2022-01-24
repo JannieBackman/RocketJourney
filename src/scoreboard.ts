@@ -1,10 +1,10 @@
-let score: number;
-score = 0;
 class ScoreBoard {
+    private score: number;
     gameManager: GameManager;
 
     constructor(gameManager: GameManager) {
         this.gameManager = gameManager;
+        this.score = 0;
         textFont(font);
         textSize(20);
         textAlign(RIGHT);
@@ -21,7 +21,7 @@ class ScoreBoard {
 
     private showCurrentScore() {
         fill(255);
-        text('SCORE ' + score, 800, 25);
+        text('SCORE ' + this.score, 800, 25);
     }
 
     private showBestScore() {
@@ -37,6 +37,6 @@ class ScoreBoard {
     }
 
     public addScoreForPassingObstacle() {
-        score += 10;
+        this.score += 10;
     }
 }

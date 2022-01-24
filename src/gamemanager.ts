@@ -5,18 +5,24 @@ interface GameWindow {
     x: number;
     y: number;
 }
+interface ObstacleData {
+    image: p5.Image[];
+    width: number;
+    height: number;
+    speed: number;
+}
+
 
 class GameManager {
     public rocket: Rocket;
-    private obstacleData: object[]
+    private obstacleData: ObstacleData[]
     public obstacles: Obstacle[]
     private timeCounter: number;
     private speedDuration: number;
     public scoreBoard: ScoreBoard;
-    static rocket: Rocket;
 
     constructor() {
-        this.rocket = new Rocket(images.rocket, 10, (height - 115) / 2, 115, 63, 5)
+        this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 5)
         this.scoreBoard = new ScoreBoard(this);
 
         this.timeCounter = 0;
@@ -59,8 +65,7 @@ class GameManager {
     }
 
     private createObstacle() {
-        let obstacleData: any = {}
-        obstacleData = random(this.obstacleData);
+        const obstacleData = random(this.obstacleData);
         let yPos = random(-10, height - obstacleData.height + 10);
         let xPos = width;
         this.obstacles.push(new Obstacle(obstacleData.image, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200, 160)));
