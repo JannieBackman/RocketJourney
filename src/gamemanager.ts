@@ -18,22 +18,22 @@ class GameManager {
 
     constructor() {
         this.movingObjects = [];
-        this.rocket = new Rocket(images.rocket, 10, (height - 115) /2, 115, 63, 5)
+        this.rocket = new Rocket(images.rocket, 10, (height - 115) / 2, 115, 63, 5)
         this.scoreBoard = new ScoreBoard(this);
 
         this.timeCounter = 0;
         this.speedDuration = 0;
         this.obstacles = [];
         this.obstacleData = [
-            {image: images.jellyFish, width: 69, height: 42, speed: 3},
-            {image: images.alien, width: 39, height: 72, speed: 3},
-            {image: images.meteor, width: 216, height: 104, speed: 3},
-            {image: images.octopus, width: 66, height: 57, speed: 3},
-            {image: images.palien, width: 58, height: 62, speed: 3},
-            {image: images.saturn, width: 129, height: 81, speed: 3},
-            {image: images.star, width: 42, height: 42, speed: 3},
-            {image: images.planet, width: 58, height: 50, speed: 3},
-            {image: images.superman, width: 120, height: 62, speed: 3},
+            { image: images.jellyFish, width: 69, height: 42, speed: 3 },
+            { image: images.alien, width: 39, height: 72, speed: 3 },
+            { image: images.meteor, width: 216, height: 104, speed: 3 },
+            { image: images.octopus, width: 66, height: 57, speed: 3 },
+            { image: images.palien, width: 58, height: 62, speed: 3 },
+            { image: images.saturn, width: 129, height: 81, speed: 3 },
+            { image: images.star, width: 42, height: 42, speed: 3 },
+            { image: images.planet, width: 58, height: 50, speed: 3 },
+            { image: images.superman, width: 120, height: 62, speed: 3 },
         ];
         this.isIntroSequence = true;
         setTimeout(() => this.isIntroSequence = false, 3000)
@@ -51,7 +51,7 @@ class GameManager {
         if (!this.isIntroSequence) {
             this.timeCounter += deltaTime;
             if (this.timeCounter >= 1500) {
-                this.createObstacle(); 
+                this.createObstacle();
                 this.timeCounter = 0;
             }
         }
@@ -67,7 +67,7 @@ class GameManager {
         obstacleData = random(this.obstacleData);
         let yPos = random(-10, height - obstacleData.height + 10);
         let xPos = width;
-        this.obstacles.push(new Obstacle(obstacleData.image, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200,160)));
+        this.obstacles.push(new Obstacle(obstacleData.image, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200, 160)));
     }
 
     public draw() {
@@ -77,15 +77,12 @@ class GameManager {
         }
 
         for (let i = 0; i < this.obstacles.length; i++) {
-        if (this.obstacles[i].x == 242) {
-            console.log(this.obstacles[i])
-            isBehindRocket = true;
-            score += 10;
-        } else {
-            isBehindRocket = false;
-        }
+            if (this.obstacles[i].x + this.obstacles[i].width <= this.rocket.x && this.obstacles[i].isBehindRocket === false) {
+                this.obstacles[i].isBehindRocket = true;
+                score += 10;
+            }
 
-        this.scoreBoard.draw();
+            this.scoreBoard.draw();
+        }
     }
-} 
 }
