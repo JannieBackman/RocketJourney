@@ -7,18 +7,15 @@ interface GameWindow {
 }
 
 class GameManager {
-    private movingObjects: MovingObject[];
     public rocket: Rocket;
     private obstacleData: object[]
     public obstacles: Obstacle[]
     private timeCounter: number;
     private speedDuration: number;
-    private isIntroSequence: boolean;
-    private scoreBoard: ScoreBoard;
+    public scoreBoard: ScoreBoard;
     static rocket: Rocket;
 
     constructor() {
-        this.movingObjects = [];
         this.rocket = new Rocket(images.rocket, 10, (height - 115) / 2, 115, 63, 5)
         this.scoreBoard = new ScoreBoard(this);
 
@@ -36,8 +33,6 @@ class GameManager {
             { image: images.planet, width: 58, height: 50, speed: 3 },
             { image: images.superman, width: 120, height: 62, speed: 3 },
         ];
-        this.isIntroSequence = true;
-        setTimeout(() => this.isIntroSequence = false, 3000)
     }
 
     public update() {
@@ -49,7 +44,7 @@ class GameManager {
             }
         }
 
-        if (!this.isIntroSequence) {
+        if (this.rocket.x >= (width - this.rocket.width) / 3) {
             this.timeCounter += deltaTime;
             if (this.timeCounter >= 1500) {
                 this.createObstacle();
@@ -87,6 +82,7 @@ class GameManager {
                 this.obstacles[i].x + this.obstacles[i].width > this.rocket.x &&
                 this.obstacles[i].y < this.rocket.y + this.rocket.height &&
                 this.obstacles[i].height + this.obstacles[i].y > this.rocket.y) {
+                isRunning = false;
                 isGameOver = true;
             }
         }

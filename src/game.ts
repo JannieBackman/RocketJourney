@@ -21,15 +21,16 @@ class Game {
     }
 
     private keyPressed() {
-        if (keyCode === 32) {
+        if (isStartMenu && keyCode === 32) {
             isRunning = true;
         }
 
-        if (isGameOver && keyCode === 32) {
-            isRunning = false;
+        if (isGameOver && keyCode === 32) {  // not done
+            isGameOver = false;
+            isRunning = true;
+        } else if (isGameOver && keyCode === ESCAPE) {
             isGameOver = false;
             isStartMenu = true;
-            console.log('isRunning: ' + isRunning + ' isGameOver: ' + isGameOver + ' isStartMenu: ' + isStartMenu)
         }
     }
 
@@ -56,10 +57,12 @@ class Game {
 
         if (isGameOver) {
             this.gameOverScene.draw();
+            game = new Game; // not done
         } else if (isRunning) {
             this.gameManager.draw();
         } else if (isStartMenu) {
             this.startMenuScene.draw();
         }
     }
-} 
+}
+
