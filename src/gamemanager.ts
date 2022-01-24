@@ -8,13 +8,14 @@ interface GameWindow {
 
 class GameManager {
     private movingObjects: MovingObject[];
-    private rocket: Rocket;
+    public rocket: Rocket;
     private obstacleData: object[]
-    private obstacles: Obstacle[]
+    public obstacles: Obstacle[]
     private timeCounter: number;
     private speedDuration: number;
     private isIntroSequence: boolean;
     private scoreBoard: ScoreBoard;
+    static rocket: Rocket;
 
     constructor() {
         this.movingObjects = [];
@@ -74,15 +75,20 @@ class GameManager {
         this.rocket.draw();
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].draw();
+            this.obstacles[i].obstacleIsBehindRocket(this.rocket, this.scoreBoard);
         }
+        this.scoreBoard.draw();
+        this.checkCollision();
+    }
 
+    private checkCollision() {
         for (let i = 0; i < this.obstacles.length; i++) {
-            if (this.obstacles[i].x + this.obstacles[i].width <= this.rocket.x && this.obstacles[i].isBehindRocket === false) {
-                this.obstacles[i].isBehindRocket = true;
-                score += 10;
+            if (this.obstacles[i].x < this.rocket.x + this.rocket.width &&
+                this.obstacles[i].x + this.obstacles[i].width > this.rocket.x &&
+                this.obstacles[i].y < this.rocket.y + this.rocket.height &&
+                this.obstacles[i].height + this.obstacles[i].y > this.rocket.y) {
+                isGameOver = true;
             }
-
-            this.scoreBoard.draw();
         }
     }
 }
