@@ -2,13 +2,19 @@
 class Obstacle extends MovingObject {
     public isBehindRocket: Boolean;
 
-    constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, angle?: number) {
-        const hitBox: HitBox = {
-            x: 0,
-            y: 0,
-            width: width,
-            height: height
-        };
+    //constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, angle?: number) {
+
+constructor(images: p5.Image[], hitBox: HitBox, x: number, y: number, width: number, height: number, speed: number, angle?: number) {
+        // const hitBox: HitBox = {
+        //      x1: 0,
+        //      y1: 0,
+        //      width1: width,
+        //      height1: height,
+        //      x2: width * 0.5,
+        //      y2: height * 0.5,
+        //      width2: width,
+        //      height2: height,
+        // };
         super(images, x, y, width, height, speed, hitBox, angle);
         
         this.isBehindRocket = false;
