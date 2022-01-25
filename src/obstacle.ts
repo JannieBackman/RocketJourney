@@ -1,23 +1,22 @@
 
 class Obstacle extends MovingObject {
-    public isBehindRocket: Boolean = false;
+    public isBehindRocket: Boolean;
 
-    public draw() {
-        this.update();
+    constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, angle?: number) {
+        const hitBox: HitBox = {
+            x: 0,
+            y: 0,
+            width: width,
+            height: height
+        };
+        super(images, x, y, width, height, speed, hitBox, angle);
+        
+        this.isBehindRocket = false;
+    }
+
+    public update() {
+        super.update();
         this.fadeInObstacle();
-
-        let i;
-        if (this.animationTimeCounter < 500) {
-            i = 0;
-        } else {
-            i = 1;
-        }
-
-        image(this.images[i], this.x, this.y, this.width, this.height);
-
-        if (this.animationTimeCounter >= 1000) {
-            this.animationTimeCounter = 0;
-        }
     }
 
     protected fadeInObstacle() {

@@ -31,6 +31,7 @@ class Game {
         } else if (isGameOver && keyCode === ESCAPE) {
             isGameOver = false;
             isStartMenu = true;
+            this.gameManager = new GameManager();
         }
     }
 
@@ -57,7 +58,6 @@ class Game {
 
         if (isGameOver) {
             this.gameOverScene.draw();
-            game = new Game; // not done
         } else if (isRunning) {
             this.gameManager.draw();
         } else if (isStartMenu) {

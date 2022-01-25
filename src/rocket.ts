@@ -1,5 +1,16 @@
 class Rocket extends MovingObject {
 
+    constructor(x: number, y: number, width: number, height: number, speed: number, angle?: number) {
+        const hitBox: HitBox = {
+            x: width * .15,
+            y: height * .25,
+            width: width * .8,
+            height: height * .5
+        }
+        
+        super(images.rocket, x, y, width, height, speed, hitBox, angle);
+    }
+
     protected moveUp() {
         this.y -= this.speed;
         if (this.y < 0) {
@@ -21,20 +32,10 @@ class Rocket extends MovingObject {
         }
     }
 
-    public draw() {
-        this.update();
+    public update() {
+        super.update();
         this.moveToStart();
-
-        let i;
-        if (this.animationTimeCounter < 500) {
-            i = 0;
-        } else {
-            i = 1;
-        } image(this.images[i], this.x, this.y, this.width, this.height)
-        if (this.animationTimeCounter >= 1000) {
-            this.animationTimeCounter = 0;
-        }
-
+        
         if (keyIsDown(UP_ARROW)) {
             this.moveUp();
         } else if (keyIsDown(DOWN_ARROW)) {
