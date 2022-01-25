@@ -84,13 +84,19 @@ class GameManager {
 
     private checkCollision() {
         for (let i = 0; i < this.obstacles.length; i++) {
-            if (this.obstacles[i].x < this.rocket.x + this.rocket.width &&
-                this.obstacles[i].x + this.obstacles[i].width > this.rocket.x &&
-                this.obstacles[i].y < this.rocket.y + this.rocket.height &&
-                this.obstacles[i].height + this.obstacles[i].y > this.rocket.y) {
+            if (this.obstacles[i].hitBox.x1 < this.rocket.hitBox.x1 + this.rocket.hitBox.width1 &&
+                this.obstacles[i].hitBox.x1  + this.obstacles[i].hitBox.width1 > this.rocket.hitBox.x1 &&
+                this.obstacles[i].hitBox.y1 < this.rocket.hitBox.y1 + this.rocket.hitBox.height1 &&
+                this.obstacles[i].hitBox.height1 + this.obstacles[i].hitBox.y1 > this.rocket.hitBox.y1) 
+                {
+                console.log('bang') 
+                }
+                // if (this.obstacles[i].x < this.rocket.x + this.rocket.width &&
+                //     this.obstacles[i].x + this.obstacles[i].width > this.rocket.x &&
+                //     this.obstacles[i].y < this.rocket.y + this.rocket.height &&
+                //     this.obstacles[i].height + this.obstacles[i].y > this.rocket.y) 
                 
-                this.gameState.setGameOver();
+                // this.gameState.setGameOver();
             }
-        }
     }
 }
