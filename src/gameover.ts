@@ -1,12 +1,10 @@
 class GameOverMenu {
-    game: Game;
     gameOverText?: p5.Image;
     restartText?: p5.Image;
     quitText?: p5.Image;
     textBlinkTimer: number;
 
-    constructor(game: Game) {
-        this.game = game;
+    constructor() {
         this.textBlinkTimer = 0;
     }
 
