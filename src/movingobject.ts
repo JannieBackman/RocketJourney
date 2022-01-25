@@ -18,7 +18,7 @@ class MovingObject {
     protected angle: number;
     protected animationTimeCounter: number;
     protected images: p5.Image[] = [];
-    protected hitBox: HitBox;
+    public hitBox: HitBox;
 
     constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, hitBox: HitBox, angle?: number) {
         this.images = images;
