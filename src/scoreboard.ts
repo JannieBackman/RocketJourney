@@ -1,9 +1,7 @@
 class ScoreBoard {
     private score: number;
-    gameManager: GameManager;
 
-    constructor(gameManager: GameManager) {
-        this.gameManager = gameManager;
+    constructor() {
         this.score = 0;
         textFont(font);
         textSize(20);

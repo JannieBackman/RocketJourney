@@ -1,42 +1,54 @@
-let isStartMenu: Boolean;
-let isRunning: Boolean;
-let isGameOver: Boolean;
+interface IGameState {
+    setGameOver: () => void;
+    isStartMenu: boolean;
+    isRunning: boolean;
+    isGameOver: boolean;
+}
 
-isStartMenu = true;
-isRunning = false;
-isGameOver = false;
-
-class Game {
+class Game implements IGameState {
     private gameManager: GameManager;
     private startMenuScene: StartMenu;
     private gameOverScene: GameOverMenu;
     private backgroundImageTimeCounter: number;
+    public isStartMenu: boolean;
+    public isRunning: boolean;
+    public isGameOver: boolean;
 
     constructor() {
-        this.gameManager = new GameManager();
-        this.startMenuScene = new StartMenu(this);
-        this.gameOverScene = new GameOverMenu(this);
+        this.gameManager = new GameManager(this);
+        this.startMenuScene = new StartMenu();
+        this.gameOverScene = new GameOverMenu();
         this.backgroundImageTimeCounter = 0;
-        console.log(isStartMenu, isRunning, isGameOver)
+        this.isStartMenu = true;
+        this.isRunning = false;
+        this.isGameOver = false;
     }
 
     private keyPressed() {
-        if (isStartMenu && keyCode === 32) {
-            isRunning = true;
+        if (this.isStartMenu && keyCode === 32) {
+            this.isRunning = true;
         }
 
-        if (isGameOver && keyCode === 32) {  // not done
-            isGameOver = false;
-            isRunning = true;
-        } else if (isGameOver && keyCode === ESCAPE) {
-            isGameOver = false;
-            isStartMenu = true;
-            this.gameManager = new GameManager();
+        if (this.isGameOver && keyCode === 32) {  // not done
+            this.isGameOver = false;
+            this.isRunning = true;
+        } else if (this.isGameOver && keyCode === ESCAPE) {
+            this.isGameOver = false;
+            this.isStartMenu = true;
+            this.gameManager = new GameManager(this);
         }
     }
 
+    public setGameOver() {
+        this.isRunning = false;
+        this.isGameOver = true;
+        this.gameManager = new GameManager(this);
+    }
+    
     public update() {
-        this.gameManager.update();
+        if (this.isRunning) {
+            this.gameManager.update();
+        }
         this.keyPressed();
     }
 
@@ -56,11 +68,11 @@ class Game {
             this.backgroundImageTimeCounter = 0;
         }
 
-        if (isGameOver) {
+        if (this.isGameOver) {
             this.gameOverScene.draw();
-        } else if (isRunning) {
+        } else if (this.isRunning) {
             this.gameManager.draw();
-        } else if (isStartMenu) {
+        } else if (this.isStartMenu) {
             this.startMenuScene.draw();
         }
     }

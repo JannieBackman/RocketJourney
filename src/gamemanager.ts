@@ -14,6 +14,7 @@ interface ObstacleData {
 
 
 class GameManager {
+    private gameState: IGameState;
     public rocket: Rocket;
     private obstacleData: ObstacleData[]
     public obstacles: Obstacle[]
@@ -21,9 +22,10 @@ class GameManager {
     private speedDuration: number;
     public scoreBoard: ScoreBoard;
 
-    constructor() {
+    constructor(gameState: IGameState) {
+        this.gameState = gameState;
         this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 5)
-        this.scoreBoard = new ScoreBoard(this);
+        this.scoreBoard = new ScoreBoard();
 
         this.timeCounter = 0;
         this.speedDuration = 0;
@@ -87,8 +89,8 @@ class GameManager {
                 this.obstacles[i].x + this.obstacles[i].width > this.rocket.x &&
                 this.obstacles[i].y < this.rocket.y + this.rocket.height &&
                 this.obstacles[i].height + this.obstacles[i].y > this.rocket.y) {
-                isRunning = false;
-                isGameOver = true;
+                
+                this.gameState.setGameOver();
             }
         }
     }

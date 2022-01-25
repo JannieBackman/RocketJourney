@@ -1,11 +1,9 @@
 class StartMenu {
-    game: Game;
     logo?: p5.Image;
     upAndDown?: p5.Image;
     textBlinkTimer: number;
     
-    constructor(game: Game) {
-        this.game = game;
+    constructor() {
         this.textBlinkTimer = 0;
     }
 
