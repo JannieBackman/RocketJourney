@@ -1,8 +1,12 @@
 interface HitBox {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
+    x1: number;
+    y1: number;
+    width1: number;
+    height1: number;
+    x2: number; 
+    y2: number; 
+    width2: number;
+    height2: number;
 }
 
 class MovingObject {
@@ -55,9 +59,13 @@ class MovingObject {
         push();
         stroke('red');
         noFill();
-        const x = this.x + this.hitBox.x;
-        const y = this.y + this.hitBox.y;
-        rect(x, y, this.hitBox.width, this.hitBox.height)
+        const x = this.x + this.hitBox.x1;
+        const y = this.y + this.hitBox.y1;
+        rect(x, y, this.hitBox.width1, this.hitBox.height1)
+        stroke('yellow');
+        const x2 = this.x + this.hitBox.x2;
+        const y2 = this.y + this.hitBox.y2;
+        rect(x2, y2, this.hitBox.width2, this.hitBox.height2)
         pop();
     }
 
