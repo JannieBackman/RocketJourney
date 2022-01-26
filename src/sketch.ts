@@ -19,6 +19,7 @@ interface Images {
 }
 
 interface Sound {
+	bgm: p5.SoundFile,
 	gamestart: p5.SoundFile,
 	gameover: p5.SoundFile,
 	collision: p5.SoundFile
@@ -88,9 +89,10 @@ function preload() {
 	};
 	font = loadFont('/assets/font/PressStart2P-Regular.ttf');
 	sound = {
+		bgm: loadSound('/assets/sound/bgm.mp3'),
 		gamestart: loadSound('/assets/sound/gamestart.mp3'),
 		gameover: loadSound('/assets/sound/gameover.mp3'),
-		collision: loadSound('/assets/sound/collision.mp3')
+		collision: loadSound('/assets/sound/explosion.mp3')
 	}
 }
 

@@ -8,16 +8,13 @@ class GameOverMenu {
     constructor(gameManager: GameManager) {
         this.textBlinkTimer = 0;
         this.gameManager = gameManager;
-            
     }
  
-
     draw() {
         this.gameManager.scoreBoard.draw()
         image(images.gameOver, (images.background[0].width / 20 - images.gameOver.width / 2), 200);
         image(images.quit, (images.background[0].width / 20 - images.quit.width / 2), 335);
         
-       
         this.textBlinkTimer += deltaTime;
        
         let i;
@@ -29,6 +26,5 @@ class GameOverMenu {
         if (this.textBlinkTimer >= 600) {
             this.textBlinkTimer = 0;
         }  
-        
     } 
 }
