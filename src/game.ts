@@ -55,6 +55,12 @@ class Game implements IGameState {
 
     public draw() {
         background('rgb(0, 4, 10)');
+        
+        // keyIsDown for sound effect (gamestart)
+        if (this.isStartMenu && keyIsDown(32)) {
+            console.log('pressed')
+            sound.gamestart.play();
+        }
 
         this.backgroundImageTimeCounter += deltaTime;
         let i;
@@ -73,6 +79,7 @@ class Game implements IGameState {
             this.gameOverScene.draw();
         } else if (this.isRunning) {
             this.gameManager.draw();
+            this.isStartMenu = false; // line added for sound play
         } else if (this.isStartMenu) {
             this.startMenuScene.draw();
         }

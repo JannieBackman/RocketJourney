@@ -18,9 +18,16 @@ interface Images {
 	leaderBoard: p5.Image
 }
 
+interface Sound {
+	gamestart: p5.SoundFile,
+	gameover: p5.SoundFile,
+	collision: p5.SoundFile
+}
+
 let game: Game;
 let images: Images;
 let font: p5.Font;
+let sound: Sound;
 
 function preload() {
 	images = {
@@ -80,6 +87,11 @@ function preload() {
 		leaderBoard: loadImage('/assets/images/leaderboard.svg'),
 	};
 	font = loadFont('/assets/font/PressStart2P-Regular.ttf');
+	sound = {
+		gamestart: loadSound('/assets/sound/gamestart.mp3'),
+		gameover: loadSound('/assets/sound/gameover.mp3'),
+		collision: loadSound('/assets/sound/collision.mp3')
+	}
 }
 
 function setup() {
