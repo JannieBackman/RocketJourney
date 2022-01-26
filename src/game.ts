@@ -17,7 +17,7 @@ class Game implements IGameState {
     constructor() {
         this.gameManager = new GameManager(this);
         this.startMenuScene = new StartMenu();
-        this.gameOverScene = new GameOverMenu();
+        this.gameOverScene = new GameOverMenu(this.gameManager);
         this.backgroundImageTimeCounter = 0;
         this.isStartMenu = true;
         this.isRunning = false;
@@ -43,6 +43,7 @@ class Game implements IGameState {
         this.isRunning = false;
         this.isGameOver = true;
         this.gameManager = new GameManager(this);
+        
     }
     
     public update() {

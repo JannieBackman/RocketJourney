@@ -12,7 +12,7 @@ class ScoreBoard {
         this.printScore();
     }
 
-    private printScore() {
+    public printScore() {
         this.showCurrentScore();
         this.showBestScore();
     }
