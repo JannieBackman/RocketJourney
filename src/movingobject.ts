@@ -51,8 +51,7 @@ class MovingObject {
         if (this.animationTimeCounter >= 1000) {
             this.animationTimeCounter = 0;
         }
-        
-        this.drawHitBox();
+        // this.drawHitBox();
     }
 
     private drawHitBox() {
