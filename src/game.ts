@@ -23,13 +23,14 @@ class Game implements IGameState {
         this.isRunning = false;
         this.isGameOver = false;
     }
-
     private keyPressed() {
-        if (this.isStartMenu && keyCode === 32) {
+        if (this.isStartMenu && keyIsDown(32)) {
+            sound.gamestart.play();
             this.isRunning = true;
         }
 
-        if (this.isGameOver && keyCode === 32) {  // not done
+        if (this.isGameOver && keyIsDown(32)) {  // not done
+            sound.gamestart.play();
             this.isGameOver = false;
             this.isRunning = true;
         } else if (this.isGameOver && keyCode === ESCAPE) {
@@ -43,7 +44,6 @@ class Game implements IGameState {
         this.isRunning = false;
         this.isGameOver = true;
         this.gameManager = new GameManager(this);
-        
     }
     
     public update() {
@@ -55,12 +55,7 @@ class Game implements IGameState {
 
     public draw() {
         background('rgb(0, 4, 10)');
-        
-        // keyIsDown for sound effect (gamestart)
-        if (this.isStartMenu && keyIsDown(32)) {
-            console.log('pressed')
-            sound.gamestart.play();
-        }
+        // console.log('isRunning: ' + this.isRunning, 'isGameOver: ' + this.isGameOver, 'startMenu ' + this.isStartMenu)
 
         this.backgroundImageTimeCounter += deltaTime;
         let i;

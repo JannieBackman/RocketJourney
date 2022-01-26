@@ -39,6 +39,8 @@ class GameManager {
             { image: images.planet, width: 58, height: 50, speed: 3, hitBox: {x1: 0, y1: 0, width1: 50, height1: 50, x2: 0, y2: 0, width2: 50, height2: 50} },
             { image: images.superman, width: 120, height: 62, speed: 3, hitBox: {x1: 0, y1: 40, width1: 120, height1: 22, x2: 25, y2: 5, width2: 70, height2: 57} },
         ]; 
+        sound.bgm.setVolume(0.05);
+        sound.bgm.play();
     }
 
     public update() {
@@ -89,7 +91,7 @@ class GameManager {
             const rocketTopLeftX1 = this.rocket.x + this.rocket.hitBox.x1;
             const rocketTopLeftY1 = this.rocket.y + this.rocket.hitBox.y1;
 
-            // UNHIDE WHEN CODING rocket yellow box
+            // rocket yellow box
             const rocketTopLeftX2 = this.rocket.x + this.rocket.hitBox.x2;
             const rocketTopLeftY2 = this.rocket.y + this.rocket.hitBox.y2;
 
@@ -126,7 +128,10 @@ class GameManager {
                             (rocketTopLeftY2 + this.rocket.hitBox.height2 > obstacleTopLeftY2)
 
             if (hitTest1 || hitTest2 || hitTest3 || hitTest4 ) {
+                sound.bgm.stop();
+                sound.collision.play(); 
                 this.gameState.setGameOver();
+                sound.gameover.play(); 
             }
         }
     }
