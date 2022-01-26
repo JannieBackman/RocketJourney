@@ -69,7 +69,6 @@ class GameManager {
         let yPos = random(-10, height - obstacleData.height + 10);
         let xPos = width;
         this.obstacles.push(new Obstacle(obstacleData.image, obstacleData.hitBox, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200, 160)));
-        //this.obstacles.push(new Obstacle(obstacleData.image, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200, 160)));
     }
 
     public draw() {
@@ -86,45 +85,49 @@ class GameManager {
         for (let i = 0; i < this.obstacles.length; i++) {
             let obstacle = this.obstacles[i];
             
+            // rocket red box
             const rocketTopLeftX1 = this.rocket.x + this.rocket.hitBox.x1;
             const rocketTopLeftY1 = this.rocket.y + this.rocket.hitBox.y1;
 
-            // UNHIDE WHEN CODING
-            //const rocketTopLeftX2 = this.rocket.x + this.rocket.hitBox.x2;
-            //const rocketTopLeftY2 = this.rocket.y + this.rocket.hitBox.y2;
+            // UNHIDE WHEN CODING rocket yellow box
+            const rocketTopLeftX2 = this.rocket.x + this.rocket.hitBox.x2;
+            const rocketTopLeftY2 = this.rocket.y + this.rocket.hitBox.y2;
 
+            // obstacle red box
             const obstacleTopLeftX1 = obstacle.x + obstacle.hitBox.x1;
             const obstacleTopLeftY1 = obstacle.y + obstacle.hitBox.y1;
 
+            // obstacle yelllow box
             const obstacleTopLeftX2 = obstacle.x + obstacle.hitBox.x2;
             const obstacleTopLeftY2 = obstacle.y + obstacle.hitBox.y2;
 
-            // rocket red box + obstacle red box
+            // rocket red box 1 + obstacle red box 1
             const hitTest1 = (rocketTopLeftX1 < obstacleTopLeftX1 + obstacle.hitBox.width1) &&
                             (rocketTopLeftX1 + this.rocket.hitBox.width1 > obstacleTopLeftX1) &&
                             (rocketTopLeftY1 < obstacleTopLeftY1 + obstacle.hitBox.height1) &&
                             (rocketTopLeftY1 + this.rocket.hitBox.height1 > obstacleTopLeftY1)
                                   
-            // rocket red box + obstacle yellow box 
+            // rocket red box 1 + obstacle yellow box  2
             const hitTest2 = (rocketTopLeftX1 < obstacleTopLeftX2 + obstacle.hitBox.width2) &&
-                               (rocketTopLeftX1 + this.rocket.hitBox.width2 > obstacleTopLeftX2) &&
+                               (rocketTopLeftX1 + this.rocket.hitBox.width1 > obstacleTopLeftX2) &&
                                (rocketTopLeftY1 < obstacleTopLeftY2 + obstacle.hitBox.height2) &&
-                               (rocketTopLeftY1 + this.rocket.hitBox.height2 > obstacleTopLeftY2)
+                               (rocketTopLeftY1 + this.rocket.hitBox.height1 > obstacleTopLeftY2)
             
-            // TODO:
-            // rocket yellow box + obstacle red box 
-            // rocket yellow box + obstacle yellow box
+            // rocket yellow box 2 + obstacle red box 1
+            const hitTest3 = (rocketTopLeftX2 < obstacleTopLeftX1 + obstacle.hitBox.width1) &&
+                            (rocketTopLeftX2 + this.rocket.hitBox.width2 > obstacleTopLeftX1) &&
+                            (rocketTopLeftY2 < obstacleTopLeftY1 + obstacle.hitBox.height1) &&
+                            (rocketTopLeftY2 + this.rocket.hitBox.height2 > obstacleTopLeftY1)
 
-            if (hitTest1 || hitTest2) {
-                console.log('bang')
-                // this.gameState.setGameOver();
+            // rocket red box 2 + obstacle yellow box  2
+            const hitTest4 = (rocketTopLeftX2 < obstacleTopLeftX2 + obstacle.hitBox.width2) &&
+                            (rocketTopLeftX2 + this.rocket.hitBox.width2 > obstacleTopLeftX2) &&
+                            (rocketTopLeftY2 < obstacleTopLeftY2 + obstacle.hitBox.height2) &&
+                            (rocketTopLeftY2 + this.rocket.hitBox.height2 > obstacleTopLeftY2)
+
+            if (hitTest1 || hitTest2 || hitTest3 || hitTest4 ) {
+                this.gameState.setGameOver();
             }
-                /*
-                // if (this.obstacles[i].x < this.rocket.x + this.rocket.width &&
-                //     this.obstacles[i].x + this.obstacles[i].width > this.rocket.x &&
-                //     this.obstacles[i].y < this.rocket.y + this.rocket.height &&
-                //     this.obstacles[i].height + this.obstacles[i].y > this.rocket.y) 
-                */
-            }
+        }
     }
 }
