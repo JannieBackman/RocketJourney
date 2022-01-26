@@ -12,7 +12,7 @@ interface ObstacleData {
     speed: number;
 }
 class GameManager {
-    private gameState: IGameState;
+    public gameState: IGameState;
     public rocket: Rocket;
     private obstacleData: ObstacleData[]
     public obstacles: Obstacle[]
@@ -23,7 +23,7 @@ class GameManager {
     constructor(gameState: IGameState) {
         this.gameState = gameState;
         this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 5)
-        this.scoreBoard = new ScoreBoard();
+        this.scoreBoard = new ScoreBoard(this, gameState);
 
         this.timeCounter = 0;
         this.speedDuration = 0;
