@@ -1,8 +1,12 @@
 class ScoreBoard {
     private score: number;
+    gameManager: GameManager;
+    gameState: IGameState;
 
-    constructor() {
+    constructor(gameManager: GameManager, gameState: IGameState) {
         this.score = 0;
+        this.gameManager = gameManager;
+        this.gameState = gameState;
         textFont(font);
         textSize(20);
         textAlign(RIGHT);
@@ -12,9 +16,9 @@ class ScoreBoard {
         this.printScore();
     }
 
-    private printScore() {
+    public printScore() {
         this.showCurrentScore();
-        this.showBestScore();
+         this.showBestScore();
     }
 
     private showCurrentScore() {
@@ -22,16 +26,18 @@ class ScoreBoard {
         text('SCORE ' + this.score, 800, 25);
     }
 
-    private showBestScore() {
-        // if (isGameOver) { 
-        // let scoreArray = [];
-        // scoreArray.push(score);
-        // console.log(scoreArray)
-        // }
-    }
+     public showBestScore() {
+        fill(255);
+        text('BESTSCORE ' + this.score, 800, 50);
+    if (this.gameState.isGameOver === true) { 
+            let scoreArray = [];
+            scoreArray.push(this.score);
+            console.log(scoreArray)
+        }
+     };
 
     private filterBestScore() {
-
+//sortera bestscore i lista
     }
 
     public addScoreForPassingObstacle() {
