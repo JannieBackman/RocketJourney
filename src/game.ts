@@ -3,6 +3,7 @@ interface IGameState {
     isStartMenu: boolean;
     isRunning: boolean;
     isGameOver: boolean;
+    isScoreUpdated: boolean;
 }
 
 class Game implements IGameState {
@@ -13,6 +14,7 @@ class Game implements IGameState {
     public isStartMenu: boolean;
     public isRunning: boolean;
     public isGameOver: boolean;
+    public isScoreUpdated: boolean;
 
     constructor() {
         this.gameManager = new GameManager(this);
@@ -22,6 +24,8 @@ class Game implements IGameState {
         this.isStartMenu = true;
         this.isRunning = false;
         this.isGameOver = false;
+        this.isScoreUpdated = false;
+    
     }
 
     private keyPressed() {

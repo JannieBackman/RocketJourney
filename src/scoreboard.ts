@@ -1,5 +1,6 @@
 class ScoreBoard {
     private score: number;
+    private scoreArray: number[] = [];
     gameManager: GameManager;
     gameState: IGameState;
 
@@ -29,10 +30,11 @@ class ScoreBoard {
      public showBestScore() {
         fill(255);
         text('BESTSCORE ' + this.score, 800, 50);
-    if (this.gameState.isGameOver === true) { 
-            let scoreArray = [];
-            scoreArray.push(this.score);
-            console.log(scoreArray)
+        if (this.gameState.isGameOver === true) { 
+            if(this.gameState.isScoreUpdated === false) {
+                this.scoreArray.push(this.score);
+                this.gameState.isScoreUpdated = true;
+            } 
         }
      };
 
