@@ -12,19 +12,25 @@ class GameOverMenu {
  
     draw() {
         this.gameManager.scoreBoard.draw()
-        image(images.gameOver, (images.background[0].width / 20 - images.gameOver.width / 2), 200);
-        image(images.quit, (images.background[0].width / 20 - images.quit.width / 2), 335);
+        
+        textSize(55);
+        textAlign(CENTER);
+        fill(255);
+        text('GAME OVER', 405, 255)
+        fill(100,74,163);
+        text('GAME OVER', 400, 250)        
+        fill(255);
+        textSize(18);
+        text('ESC TO QUIT', 400, 335)
         
         this.textBlinkTimer += deltaTime;
-       
-        let i;
         if (this.textBlinkTimer < 300) {
-            i = 0;
+            fill(255); 
         } else {
-            i = 1;
-        } image(images.restart[i], (images.background[0].width / 20 - images.restart[i].width / 2), 290);
+            fill(150);
+        } text('PRESS SPACE TO RESTART', 400, 290)
         if (this.textBlinkTimer >= 600) {
             this.textBlinkTimer = 0;
-        }  
+        }
     } 
 }
