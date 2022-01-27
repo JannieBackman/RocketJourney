@@ -25,7 +25,7 @@ class Game implements IGameState {
         this.isRunning = false;
         this.isGameOver = false;
         this.isScoreUpdated = false;
-    
+
     }
     private keyPressed() {
         if (this.isStartMenu && keyIsDown(32)) {
@@ -34,10 +34,13 @@ class Game implements IGameState {
         }
 
         if (this.isGameOver && keyIsDown(32)) {  // not done
+
             sound.gamestart.play();
             this.isGameOver = false;
             this.isRunning = true;
             this.gameManager = new GameManager(this);
+            this.gameOverScene = new GameOverMenu(this.gameManager);
+
         } else if (this.isGameOver && keyCode === ESCAPE) {
             this.isGameOver = false;
             this.isStartMenu = true;
@@ -48,7 +51,7 @@ class Game implements IGameState {
         this.isRunning = false;
         this.isGameOver = true;
     }
-    
+
     public update() {
         if (this.isRunning) {
             this.gameManager.update();
