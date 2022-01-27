@@ -40,10 +40,12 @@ class Rocket extends MovingObject {
         super.update();
         this.moveToStart();
         
-        if (keyIsDown(UP_ARROW)) {
-            this.moveUp();
-        } else if (keyIsDown(DOWN_ARROW)) {
-            this.moveDown();
+        if (!game.isHit) {
+            if (keyIsDown(UP_ARROW)) {
+                this.moveUp();
+            } else if (keyIsDown(DOWN_ARROW)) {
+                this.moveDown();
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 
 class Obstacle extends MovingObject {
-    public isBehindRocket: Boolean;
+    public isBehindRocket: boolean;
 
     //constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, angle?: number) {
 
@@ -18,6 +18,7 @@ constructor(images: p5.Image[], hitBox: HitBox, x: number, y: number, width: num
         super(images, x, y, width, height, speed, hitBox, angle);
         
         this.isBehindRocket = false;
+        this.isBeingHit = false;
     }
 
     public update() {
@@ -26,7 +27,9 @@ constructor(images: p5.Image[], hitBox: HitBox, x: number, y: number, width: num
     }
 
     protected fadeInObstacle() {
-        this.x = this.x - this.speed;
+        if (!game.isHit) {
+            this.x = this.x - this.speed;
+        } return 
     }
 
     public obstacleIsBehindRocket(rocket: Rocket, scoreBoard: ScoreBoard) {
@@ -37,4 +40,11 @@ constructor(images: p5.Image[], hitBox: HitBox, x: number, y: number, width: num
     }
 }
 
+// class Explosion extends MovingObject {
+//     constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, hitBox: HitBox, angle?: number) {
+
+    
+//     super(images: p5.Image[], x,y, width, height, speed, hitBox)
+//     }
+// }
 
