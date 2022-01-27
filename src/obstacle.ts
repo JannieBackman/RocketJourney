@@ -18,6 +18,7 @@ constructor(images: p5.Image[], hitBox: HitBox, x: number, y: number, width: num
         super(images, x, y, width, height, speed, hitBox, angle);
         
         this.isBehindRocket = false;
+        this.isBeingHit = false;
     }
 
     public update() {

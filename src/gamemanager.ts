@@ -129,6 +129,8 @@ class GameManager {
                             (rocketTopLeftY2 + this.rocket.hitBox.height2 > obstacleTopLeftY2)
 
             if (hitTest1 || hitTest2 || hitTest3 || hitTest4 ) {
+                this.obstacles = [obstacle];
+            
                 this.showExplosion()
                 sound.bgm.stop();
                 sound.collision.play(); 
@@ -144,6 +146,7 @@ class GameManager {
     private showExplosion() {
         game.isHit = true;
         image(images.explosion, this.rocket.x+(this.rocket.width/2), this.rocket.y, 80, 70);
+
 
     }
 }
