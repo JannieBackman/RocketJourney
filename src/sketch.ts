@@ -1,6 +1,5 @@
 interface Images {
 	background: p5.Image[],
-	logo: p5.Image,
 	upAndDown: p5.Image,
 	rocket: p5.Image[],
 	jellyFish: p5.Image[],
@@ -11,12 +10,8 @@ interface Images {
 	saturn: p5.Image[],
 	star: p5.Image[],
 	planet: p5.Image[],
-	superman: p5.Image[]
-	gameOver: p5.Image,
-	restart: p5.Image[],
-	quit: p5.Image,
-	leaderBoard: p5.Image,
-	explosion: p5.Image
+	superman: p5.Image[],
+	leaderBoard: p5.Image
 }
 
 interface Sound {
@@ -39,7 +34,6 @@ function preload() {
 			loadImage('/assets/images/background-2.svg'),
 			loadImage('/assets/images/background-1.svg')
 		],
-		logo: loadImage('/assets/images/Rocket-Journey.svg'),
 		upAndDown: loadImage('/assets/images/up-down.svg'),
 		rocket: [
 			loadImage('/assets/images/rocket-1.svg'),
@@ -81,12 +75,6 @@ function preload() {
 			loadImage('/assets/images/superman-1.svg'),
 			loadImage('/assets/images/superman-2.svg')
 		],
-		gameOver: loadImage('/assets/images/game-over.svg'),
-		restart: [
-			loadImage('/assets/images/restart-1.svg'),
-			loadImage('/assets/images/restart-2.svg')
-		],
-		quit: loadImage('/assets/images/quit.svg'),
 		leaderBoard: loadImage('/assets/images/leaderboard.svg'),
 		explosion: loadImage('assets/images/explosion-1.svg')
 	};
