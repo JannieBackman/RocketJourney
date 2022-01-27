@@ -15,7 +15,8 @@ interface Images {
 	gameOver: p5.Image,
 	restart: p5.Image[],
 	quit: p5.Image,
-	leaderBoard: p5.Image
+	leaderBoard: p5.Image,
+	explosion: p5.Image
 }
 
 interface Sound {
@@ -87,6 +88,7 @@ function preload() {
 		],
 		quit: loadImage('/assets/images/quit.svg'),
 		leaderBoard: loadImage('/assets/images/leaderboard.svg'),
+		explosion: loadImage('assets/images/explosion-1.svg')
 	};
 	font = loadFont('/assets/font/PressStart2P-Regular.ttf');
 	sound = {
