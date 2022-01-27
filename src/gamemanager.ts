@@ -41,6 +41,7 @@ class GameManager {
         ]; 
         sound.bgm.setVolume(0.05);
         sound.bgm.play();
+        sound.bgmgameover.setVolume(0.05);
     }
 
     public update() {
@@ -130,9 +131,11 @@ class GameManager {
             if (hitTest1 || hitTest2 || hitTest3 || hitTest4 ) {
                 sound.bgm.stop();
                 sound.collision.play(); 
-                this.gameState.setGameOver();
                 this.scoreBoard.save();
-                sound.gameover.play(); 
+                this.gameState.setGameOver();
+                sound.gameover.play();
+                // sound.bgmgameover.play();
+               
             }
         }
     }

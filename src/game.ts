@@ -41,12 +41,14 @@ class Game implements IGameState {
         } else if (this.isGameOver && keyCode === ESCAPE) {
             this.isGameOver = false;
             this.isStartMenu = true;
+            this.gameManager = new GameManager(this);
         }
     }
 
     public setGameOver() {
         this.isRunning = false;
         this.isGameOver = true;
+           
     }
     
     public update() {
