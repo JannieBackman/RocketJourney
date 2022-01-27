@@ -4,7 +4,6 @@ interface IGameState {
     isRunning: boolean;
     isGameOver: boolean;
     isScoreUpdated: boolean;
-    isHit: boolean;
 }
 
 class Game implements IGameState {
@@ -16,7 +15,6 @@ class Game implements IGameState {
     public isRunning: boolean;
     public isGameOver: boolean;
     public isScoreUpdated: boolean;
-    public isHit: boolean;
 
     constructor() {
         this.gameManager = new GameManager(this);
@@ -27,7 +25,6 @@ class Game implements IGameState {
         this.isRunning = false;
         this.isGameOver = false;
         this.isScoreUpdated = false;
-        this.isHit = false;
 
     }
     private keyPressed() {
@@ -36,7 +33,8 @@ class Game implements IGameState {
             this.isRunning = true;
         }
 
-        if (this.isGameOver && keyIsDown(32)) { 
+        if (this.isGameOver && keyIsDown(32)) {  // not done
+
             sound.gamestart.play();
             this.isGameOver = false;
             this.isRunning = true;
@@ -53,7 +51,7 @@ class Game implements IGameState {
     public setGameOver() {
         this.isRunning = false;
         this.isGameOver = true;
-        this.isHit = false;
+           
     }
 
     public update() {

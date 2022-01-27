@@ -10,7 +10,7 @@ interface Images {
 	saturn: p5.Image[],
 	star: p5.Image[],
 	planet: p5.Image[],
-	superman: p5.Image[],
+	superman: p5.Image[]
 	leaderBoard: p5.Image
 }
 
@@ -76,7 +76,6 @@ function preload() {
 			loadImage('/assets/images/superman-2.svg')
 		],
 		leaderBoard: loadImage('/assets/images/leaderboard.svg'),
-		explosion: loadImage('assets/images/explosion-1.svg')
 	};
 	font = loadFont('/assets/font/PressStart2P-Regular.ttf');
 	sound = {
