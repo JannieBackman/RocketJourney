@@ -23,7 +23,7 @@ class GameManager {
     constructor(gameState: IGameState) {
         this.gameState = gameState;
         this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 5)
-        this.scoreBoard = new ScoreBoard(this, gameState);
+        this.scoreBoard = new ScoreBoard();
 
         this.timeCounter = 0;
         this.speedDuration = 0;
@@ -131,6 +131,7 @@ class GameManager {
                 sound.bgm.stop();
                 sound.collision.play(); 
                 this.gameState.setGameOver();
+                this.scoreBoard.save();
                 sound.gameover.play(); 
             }
         }
