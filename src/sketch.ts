@@ -11,6 +11,7 @@ interface Images {
 	star: p5.Image[],
 	planet: p5.Image[],
 	superman: p5.Image[],
+	explosion: p5.Image,
 	leaderBoard: p5.Image
 }
 
