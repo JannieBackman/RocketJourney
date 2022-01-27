@@ -1,25 +1,27 @@
 class ScoreBoard {
     private score: number;
-    private scoreArray: number[] = [];
-    gameManager: GameManager;
-    gameState: IGameState;
+    private scoreArray: number[];
 
-    constructor(gameManager: GameManager, gameState: IGameState) {
+    constructor() {
         this.score = 0;
-        this.gameManager = gameManager;
-        this.gameState = gameState;
         textFont(font);
         textSize(20);
         textAlign(RIGHT);
+        this.scoreArray = JSON.parse(localStorage.highscore || "[]");
     }
 
-    draw() {
-        this.printScore();
+    public save() {
+
+        // console.log('Current Score: ' + currentScore)
+        // console.log('Score: ' + this.score)
+        // min([2, 3, 4, 6]);
+        this.scoreArray.push(this.score);
+        localStorage.highscore = JSON.stringify(this.scoreArray);
     }
 
-    public printScore() {
+    public draw() {
         this.showCurrentScore();
-         this.showBestScore();
+        this.showBestScore();
     }
 
     private showCurrentScore() {
@@ -27,22 +29,23 @@ class ScoreBoard {
         text('SCORE ' + this.score, 800, 25);
     }
 
-     public showBestScore() {
+    public showBestScore() {
         fill(255);
-        text('BESTSCORE ' + this.score, 800, 50);
-        if (this.gameState.isGameOver === true) { 
-            if(this.gameState.isScoreUpdated === false) {
-                this.scoreArray.push(this.score);
-                this.gameState.isScoreUpdated = true;
-            } 
-        }
-     };
+        text('BEST ' + Math.max(...this.scoreArray, 0), 800, 50);
+    }
 
     private filterBestScore() {
-//sortera bestscore i lista
+    //sortera bestscore i lista
     }
 
     public addScoreForPassingObstacle() {
         this.score += 10;
     }
 }
+
+/*
+1. push in the current score to the array 
+2. compare it with the objects that are in the array
+3. filter out the highest one 
+4. show it under BEST
+*/
