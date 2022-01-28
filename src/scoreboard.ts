@@ -5,7 +5,6 @@ class ScoreBoard {
     constructor() {
         this.score = 0;
         textFont(font);
-        textSize(20);
         this.scoreArray = JSON.parse(localStorage.highscore || "[]");
     }
 
@@ -21,12 +20,14 @@ class ScoreBoard {
     }
 
     private showCurrentScore() {
+        textSize(20);
         fill(255);
         textAlign(RIGHT);
         text('SCORE ' + this.score, 800, 25);
     }
 
     public showBestScore() {
+        textSize(20);
         fill(255);
         textAlign(RIGHT);
         text('BEST ' + Math.max(...this.scoreArray, 0), 800, 50);
