@@ -36,17 +36,19 @@ class Game implements IGameState {
             this.isRunning = true;
         }
 
-        if (this.isGameOver && keyIsDown(32)) { 
-            sound.gamestart.play();
-            this.isGameOver = false;
-            this.isRunning = true;
-            this.gameManager = new GameManager(this);
-            this.gameOverScene = new GameOverMenu(this.gameManager);
+        // if (this.isGameOver && keyCode === ESCAPE) { 
+        //     sound.gamestart.play();
+        //     this.isGameOver = false;
+        //     this.isRunning = true;
+        //     this.gameManager = new GameManager(this);
+        //     this.gameOverScene = new GameOverMenu(this.gameManager);
 
-        } else if (this.isGameOver && keyCode === ESCAPE) {
+        // } 
+        else if (this.isGameOver && keyCode === ESCAPE) {
             this.isGameOver = false;
             this.isStartMenu = true;
             this.gameManager = new GameManager(this);
+            this.gameOverScene = new GameOverMenu(this.gameManager);
         }
     }
 
