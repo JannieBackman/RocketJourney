@@ -1,9 +1,6 @@
 class GameOverMenu {
-    gameOverText?: p5.Image;
-    restartText?: p5.Image;
-    quitText?: p5.Image;
-    textBlinkTimer: number;
-    gameManager: GameManager;
+    private textBlinkTimer: number;
+    public gameManager: GameManager;
 
     constructor(gameManager: GameManager) {
         this.textBlinkTimer = 0;

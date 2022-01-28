@@ -1,7 +1,5 @@
 class StartMenu {
-    logo?: p5.Image;
-    upAndDown?: p5.Image;
-    textBlinkTimer: number;
+    private textBlinkTimer: number;
     
     constructor() {
         this.textBlinkTimer = 0;
