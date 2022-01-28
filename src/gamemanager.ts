@@ -18,15 +18,16 @@ class GameManager {
     public obstacles: Obstacle[]
     private timeCounter: number;
     private speedDuration: number;
+    private gameOverAnimationTimer: number;
     public scoreBoard: ScoreBoard;
 
     constructor(gameState: IGameState) {
         this.gameState = gameState;
         this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 5)
         this.scoreBoard = new ScoreBoard();
-
         this.timeCounter = 0;
         this.speedDuration = 0;
+        this.gameOverAnimationTimer = 0;
         this.obstacles = [];
         this.obstacleData = [
             { image: images.jellyFish, width: 69, height: 42, speed: 3, hitBox: {x1: 0, y1: 3, width1: 69, height1: 35, x2: 0, y2: 3, width2: 69, height2: 35} },
@@ -65,6 +66,16 @@ class GameManager {
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i].update();
         }
+}
+
+    public draw() {
+        this.rocket.draw();
+        for (let i = 0; i < this.obstacles.length; i++) {   
+            this.obstacles[i].draw();
+            this.obstacles[i].obstacleIsBehindRocket(this.rocket, this.scoreBoard);
+        }
+        this.scoreBoard.draw();
+        this.checkCollision();
     }
 
     private createObstacle() {
@@ -72,16 +83,6 @@ class GameManager {
         let yPos = random(-10, height - obstacleData.height + 10);
         let xPos = width;
         this.obstacles.push(new Obstacle(obstacleData.image, obstacleData.hitBox, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200, 160)));
-    }
-
-    public draw() {
-        this.rocket.draw();
-        for (let i = 0; i < this.obstacles.length; i++) {
-            this.obstacles[i].draw();
-            this.obstacles[i].obstacleIsBehindRocket(this.rocket, this.scoreBoard);
-        }
-        this.scoreBoard.draw();
-        this.checkCollision();
     }
 
     private checkCollision() {
@@ -122,31 +123,44 @@ class GameManager {
                             (rocketTopLeftY2 < obstacleTopLeftY1 + obstacle.hitBox.height1) &&
                             (rocketTopLeftY2 + this.rocket.hitBox.height2 > obstacleTopLeftY1)
 
-            // rocket red box 2 + obstacle yellow box  2
+            // rocket red box 2 + obstacle yellow box 2
             const hitTest4 = (rocketTopLeftX2 < obstacleTopLeftX2 + obstacle.hitBox.width2) &&
                             (rocketTopLeftX2 + this.rocket.hitBox.width2 > obstacleTopLeftX2) &&
                             (rocketTopLeftY2 < obstacleTopLeftY2 + obstacle.hitBox.height2) &&
                             (rocketTopLeftY2 + this.rocket.hitBox.height2 > obstacleTopLeftY2)
 
             if (hitTest1 || hitTest2 || hitTest3 || hitTest4 ) {
-                this.obstacles = [obstacle];
-            
-                this.showExplosion()
-                sound.bgm.stop();
-                sound.collision.play(); 
-                this.scoreBoard.save();
-                // this.gameState.setGameOver();
-                sound.gameover.play();
-                // sound.bgmgameover.play();
-               
+                game.isHit = true;
+                if (game.isHit) {
+                    sound.bgm.stop();
+                    this.obstacles = [obstacle];
+                    this.scoreBoard.save();
+                    this.showExplosion();
+                } 
             }
         }
     }
+    
 
     private showExplosion() {
-        game.isHit = true;
         image(images.explosion, this.rocket.x+(this.rocket.width/2), this.rocket.y, 80, 70);
 
-
+        // console.log('gameOverAnimationTimer: ' + this.gameOverAnimationTimer)
+        this.gameOverAnimationTimer += deltaTime;   
+        if (this.gameOverAnimationTimer <= 100) {
+            sound.collision.play(); 
+        } else if (this.gameOverAnimationTimer < 1000) {
+            filter(THRESHOLD, 0.2) // dont know?
+        } else if (this.gameOverAnimationTimer < 1500) {
+            // dont know 
+        } else if (this.gameOverAnimationTimer < 2000) {
+            filter(THRESHOLD, 0.2); // dont know?
+        } else if (this.gameOverAnimationTimer < 2500) {
+            // dont know 
+        } else if (this.gameOverAnimationTimer > 3000) {
+            this.gameOverAnimationTimer = 0;
+            sound.gameover.play();
+            this.gameState.setGameOver();
+        }
     }
 }

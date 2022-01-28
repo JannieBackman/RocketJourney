@@ -65,7 +65,6 @@ class Game implements IGameState {
 
     public draw() {
         background('rgb(0, 4, 10)');
-        // console.log('isRunning: ' + this.isRunning, 'isGameOver: ' + this.isGameOver, 'startMenu ' + this.isStartMenu)
 
         this.backgroundImageTimeCounter += deltaTime;
         let i;
