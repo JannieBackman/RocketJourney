@@ -48,15 +48,20 @@ class GameManager {
     public update() {
         this.speedDuration += deltaTime;
         if (this.speedDuration >= 8000) {
+            // for increasing the speed of obstacles that have been created 
             for (let i = 0; i < this.obstacles.length; i++) {
                 this.obstacles[i].increaseSpeed();
                 this.speedDuration = 0;
+            }
+            // for setting the same increased speed for obstacles that will be created
+            for (let i = 0; i < this.obstacleData.length; i++) {
+                this.obstacleData[i].speed += 1;
             }
         }
 
         if (this.rocket.x >= (width - this.rocket.width) / 3) {
             this.timeCounter += deltaTime;
-            if (this.timeCounter >= 1500) {
+            if (this.timeCounter >= 800) {
                 this.createObstacle();
                 this.timeCounter = 0;
             }
