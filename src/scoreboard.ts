@@ -1,5 +1,5 @@
 class ScoreBoard {
-    private score: number;
+    public score: number;
     private scoreArray: number[];
 
     constructor() {
