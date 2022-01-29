@@ -15,6 +15,7 @@ class GameManager {
     public gameState: IGameState;
     public rocket: Rocket;
     public scoreBoard: ScoreBoard;
+    public leaderBoard: LeaderBoard; 
     private obstacleData: ObstacleData[]
     public obstacles: Obstacle[]
     private timeCounter: number;
@@ -26,6 +27,7 @@ class GameManager {
         this.gameState = gameState;
         this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 5)
         this.scoreBoard = new ScoreBoard();
+        this.leaderBoard = new LeaderBoard();
         this.timeCounter = 0;
         this.speedDuration = 0;
         this.gameOverAnimationTimer = 0;
