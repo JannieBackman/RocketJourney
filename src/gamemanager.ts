@@ -140,23 +140,14 @@ class GameManager {
             }
         }
     }
-    
 
     private showExplosion() {
         image(images.explosion, this.rocket.x+(this.rocket.width/2), this.rocket.y, 80, 70);
-
-        // console.log('gameOverAnimationTimer: ' + this.gameOverAnimationTimer)
         this.gameOverAnimationTimer += deltaTime;   
         if (this.gameOverAnimationTimer <= 100) {
             sound.collision.play(); 
-        } else if (this.gameOverAnimationTimer < 1000) {
-            filter(THRESHOLD, 0.2) // dont know?
-        } else if (this.gameOverAnimationTimer < 1500) {
-            // dont know 
-        } else if (this.gameOverAnimationTimer < 2000) {
-            filter(THRESHOLD, 0.2); // dont know?
-        } else if (this.gameOverAnimationTimer < 2500) {
-            // dont know 
+        } else if ((this.gameOverAnimationTimer > 100 && this.gameOverAnimationTimer < 1000) || (this.gameOverAnimationTimer > 1500 && this.gameOverAnimationTimer < 2000)) {
+            filter(THRESHOLD, 0.2);
         } else if (this.gameOverAnimationTimer > 3000) {
             this.gameOverAnimationTimer = 0;
             sound.gameover.play();
