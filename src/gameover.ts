@@ -1,3 +1,4 @@
+/** Class representing 'isGameOver' state */
 class GameOverMenu {
     private textBlinkTimer: number;
     public gameManager: GameManager;
@@ -10,7 +11,7 @@ class GameOverMenu {
         this.input.style('display', 'none');
         this.input.elt.placeholder = 'YOUR NAME';
 }
-
+    /** Saves user's name input and score to the array for leaderboard */
     saveUserDetail() {
         let leaderBoardArray = this.gameManager.leaderBoard.leaderBoardArray;
         const name = this.input.value().toString().toUpperCase();
@@ -20,6 +21,7 @@ class GameOverMenu {
         localStorage.leaderboard = JSON.stringify(leaderBoardArray);
     }
     
+    /** Displays or hides input field */
     showInputField() {
         if (game.isGameOver) {
             this.input.show()

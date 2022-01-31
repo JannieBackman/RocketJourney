@@ -1,3 +1,4 @@
+/** Class representing the score board */
 class ScoreBoard {
     public score: number;
     private scoreArray: number[];
@@ -10,6 +11,7 @@ class ScoreBoard {
         this.textBlinkTimer = 0;
     }
 
+    /** Saves score to the array for score and local storage */
     public save() {
         this.scoreArray.push(this.score);
         this.scoreArray = this.scoreArray.sort((a, b) => b - a).slice(0, 1);
@@ -25,6 +27,7 @@ class ScoreBoard {
         }
     }
 
+    /** Draws text for current score */
     private showCurrentScore() {
         push();
         textSize(20);
@@ -34,6 +37,7 @@ class ScoreBoard {
         pop();
     }
 
+    /** Draws text for best score */
     public showBestScore() {
         push();
         textSize(20);
@@ -43,6 +47,7 @@ class ScoreBoard {
         pop();
     }
 
+    /** text animation */
     private showHighScoreEffect() {
         push();
         this.textBlinkTimer += deltaTime;
@@ -57,6 +62,7 @@ class ScoreBoard {
         pop();
     }
 
+    /** Adds score for every passing obstacle */
     public addScoreForPassingObstacle() {
         this.score += 10;
     }

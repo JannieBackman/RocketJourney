@@ -1,3 +1,4 @@
+/** Class representing 'isStartMenu' state */
 class StartMenu {
     private textBlinkTimer: number;
     

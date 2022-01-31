@@ -1,3 +1,7 @@
+/**
+ * Interface for classes representing obstacle data
+ * @interface
+ */
 interface ObstacleData {
     image: p5.Image[];
     hitBox: HitBox;
@@ -5,6 +9,8 @@ interface ObstacleData {
     height: number;
     speed: number;
 }
+
+/** Class representing 'isRunning' state */
 class GameManager {
     public gameState: IGameState;
     public rocket: Rocket;
@@ -88,6 +94,7 @@ class GameManager {
         this.checkCollision();
     }
 
+    /** Create obstacles with random position */
     private createObstacle() {
         const obstacleData = random(this.obstacleData);
         let yPos = random(-10, height - obstacleData.height + 10);
@@ -95,6 +102,7 @@ class GameManager {
         this.obstacles.push(new Obstacle(obstacleData.image, obstacleData.hitBox, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed));
     }
 
+    /** Runs hit tests to track a collision */
     private checkCollision() {
         for (let i = 0; i < this.obstacles.length; i++) {
             let obstacle = this.obstacles[i];
@@ -151,6 +159,7 @@ class GameManager {
         }
     }
 
+    /** Shows explosion effect */
     private showExplosion() {
         image(images.explosion, this.rocket.x+(this.rocket.width/2), this.rocket.y, 80, 70);
         this.gameOverAnimationTimer += deltaTime;   

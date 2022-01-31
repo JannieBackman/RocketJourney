@@ -1,3 +1,7 @@
+/**
+ * Interface for classes representing p5.images 
+ * @interface
+ */
 interface Images {
 	background: p5.Image[],
 	upAndDown: p5.Image,
@@ -15,6 +19,10 @@ interface Images {
 	leaderBoard: p5.Image
 }
 
+/**
+ * Interface for classes representing p5.sound
+ * @interface
+ */
 interface Sound {
 	bgm: p5.SoundFile,
 	gamestart: p5.SoundFile,
