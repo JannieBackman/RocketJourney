@@ -10,7 +10,7 @@ class ScoreBoard {
 
     public save() {
         this.scoreArray.push(this.score);
-        this.scoreArray = this.scoreArray.sort((a, b) => b - a).slice(0, 5);
+        this.scoreArray = this.scoreArray.sort((a, b) => b - a).slice(0, 9);
         localStorage.highscore = JSON.stringify(this.scoreArray);
     }
 
