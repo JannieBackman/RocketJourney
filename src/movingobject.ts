@@ -1,3 +1,7 @@
+/**
+ * Interface for classes representing hit boxes 
+ * @interface
+ */
 interface HitBox {
     x1: number;
     y1: number;
@@ -9,6 +13,7 @@ interface HitBox {
     height2: number;
 }
 
+/** Class representing the moving objects in 'isRunning' state */
 class MovingObject {
     public x: number;
     public y: number;
@@ -34,10 +39,6 @@ class MovingObject {
         this.animationTimeCounter += deltaTime;
     }
 
-    public increaseSpeed() {
-        this.speed += 1;
-    }
-
     public draw() {
         let i;
         if (this.animationTimeCounter < 500) {
@@ -49,9 +50,14 @@ class MovingObject {
         if (this.animationTimeCounter >= 1000) {
             this.animationTimeCounter = 0;
         }
-        // this.drawHitBox();
     }
 
+    /** Increases speed of the moving objects */
+    public increaseSpeed() {
+        this.speed += 1;
+    }
+
+    /** Draws hit boxes (for debugging) */
     private drawHitBox() {
         push();
         stroke('red');
