@@ -25,11 +25,11 @@ class Game implements IGameState {
         this.startMenuScene = new StartMenu();
         this.gameOverScene = new GameOverMenu(this.gameManager);
         this.backgroundImageTimeCounter = 0;
-        this.isStartMenu = true;
+        this.isStartMenu = true;  // set back to true
         this.isRunning = false;
         this.isGameOver = false;
         this.isScoreUpdated = false;
-        this.isShowingLeaderBoard = false;
+        this.isShowingLeaderBoard = false; // set back to false
         this.isHit = false;
 
     }

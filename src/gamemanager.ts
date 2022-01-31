@@ -25,7 +25,7 @@ class GameManager {
 
     constructor(gameState: IGameState) {
         this.gameState = gameState;
-        this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 5)
+        this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 8)
         this.scoreBoard = new ScoreBoard();
         this.leaderBoard = new LeaderBoard();
         this.timeCounter = 0;
@@ -46,7 +46,7 @@ class GameManager {
         ]; 
         sound.bgm.setVolume(0.05);
         sound.bgm.play();
-        sound.bgmgameover.setVolume(0.05);
+        sound.bgmgameover.setVolume(0.5);
     }
 
     public update() {
@@ -168,6 +168,7 @@ class GameManager {
             this.gameOverAnimationTimer = 0;
             sound.gameover.play();
             this.gameState.setGameOver();
+            sound.bgmgameover.play();
         }
     }
 }

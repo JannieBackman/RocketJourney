@@ -10,13 +10,17 @@ class GameOverMenu {
         this.input.style('display', 'none');
         this.input.position( width / 2, height / 2);  // not correct
         this.input.addClass('input');
+        // this.input.elt.placeholder = 'asdasd'
         // this.input.show();
 }
 
     saveUserDetail() {
-        const name = this.input.value().toString();
+        let leaderBoardArray = this.gameManager.leaderBoard.leaderBoardArray;
+        const name = this.input.value().toString().toUpperCase();
         const score = this.gameManager.scoreBoard.score;
-        this.gameManager.leaderBoard.leaderBoardArray.push({name: name, score: score})
+        leaderBoardArray.push({name: name, score: score})
+        leaderBoardArray = leaderBoardArray.sort((a, b) => b.score - a.score); 
+        localStorage.leaderboard = JSON.stringify(leaderBoardArray);
     }
     
     showInputField() {
