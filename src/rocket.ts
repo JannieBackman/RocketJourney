@@ -1,3 +1,4 @@
+/** Class representing the rocket in 'isRunning' state */
 class Rocket extends MovingObject {
 
     constructor(x: number, y: number, width: number, height: number, speed: number) {
@@ -15,6 +16,7 @@ class Rocket extends MovingObject {
         super(images.rocket, x, y, width, height, speed, hitBox);
     }
 
+    /** updates rocket's y position */
     protected moveUp() {
         this.y -= this.speed;
         if (this.y < 0) {
@@ -22,6 +24,7 @@ class Rocket extends MovingObject {
         }
     }
 
+    /** updates rocket's y position */
     protected moveDown() {
         this.y += this.speed;
         if (this.y > height - this.height) {
@@ -29,6 +32,7 @@ class Rocket extends MovingObject {
         }
     }
 
+    /** Intro sequence on game start */
     protected moveToStart() {
         this.x += this.speed * .5;
         if (this.x > (width - this.width) / 3) {

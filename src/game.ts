@@ -1,3 +1,7 @@
+/**
+ * Interface for classes representing game states
+ * @interface
+ */
 interface IGameState {
     setGameOver: () => void;
     isStartMenu: boolean;
@@ -7,6 +11,7 @@ interface IGameState {
     isHit: boolean;
 }
 
+/** Class representing game states */
 class Game implements IGameState {
     private gameManager: GameManager;
     private startMenuScene: StartMenu;
@@ -31,6 +36,7 @@ class Game implements IGameState {
 
     }
 
+    /** Function for event listeners on key press */
     private keyPressed() {
         if (this.isStartMenu && keyIsDown(32)) {
             sound.gamestart.play();
@@ -67,6 +73,7 @@ class Game implements IGameState {
         }
     }
 
+    /** Changes game state to gameover */
     public setGameOver() {
         this.isRunning = false;
         this.isGameOver = true;

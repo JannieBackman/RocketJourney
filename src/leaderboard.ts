@@ -1,8 +1,13 @@
+/**
+ * Interface for classes representing leaderboard data
+ * @interface
+ */
 interface LeaderBoardData {
     name: string;
     score: number;
 }
 
+/** Class representing 'isShowingLeaderBoard' state */
 class LeaderBoard {
     public leaderBoardArray: LeaderBoardData[];
     private textBlinkTimer: number;
