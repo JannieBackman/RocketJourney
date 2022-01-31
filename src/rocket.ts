@@ -1,6 +1,6 @@
 class Rocket extends MovingObject {
 
-    constructor(x: number, y: number, width: number, height: number, speed: number, angle?: number) {
+    constructor(x: number, y: number, width: number, height: number, speed: number) {
         let hitBox: HitBox = {
             x1: width * .15,
             y1: height * .25,
@@ -12,7 +12,7 @@ class Rocket extends MovingObject {
             width2: width * .19,
             height2: height * 1,
         }
-        super(images.rocket, x, y, width, height, speed, hitBox, angle);
+        super(images.rocket, x, y, width, height, speed, hitBox);
     }
 
     protected moveUp() {

@@ -3,7 +3,6 @@ interface IGameState {
     isStartMenu: boolean;
     isRunning: boolean;
     isGameOver: boolean;
-    isScoreUpdated: boolean;
     isShowingLeaderBoard: boolean;
     isHit: boolean;
 }
@@ -16,7 +15,6 @@ class Game implements IGameState {
     public isStartMenu: boolean;
     public isRunning: boolean;
     public isGameOver: boolean;
-    public isScoreUpdated: boolean;
     public isShowingLeaderBoard: boolean;
     public isHit: boolean;
 
@@ -25,14 +23,14 @@ class Game implements IGameState {
         this.startMenuScene = new StartMenu();
         this.gameOverScene = new GameOverMenu(this.gameManager);
         this.backgroundImageTimeCounter = 0;
-        this.isStartMenu = true;  // set back to true
+        this.isStartMenu = true;  
         this.isRunning = false;
         this.isGameOver = false;
-        this.isScoreUpdated = false;
-        this.isShowingLeaderBoard = false; // set back to false
+        this.isShowingLeaderBoard = false; 
         this.isHit = false;
 
     }
+
     private keyPressed() {
         if (this.isStartMenu && keyIsDown(32)) {
             sound.gamestart.play();
@@ -40,24 +38,21 @@ class Game implements IGameState {
             this.isStartMenu = false;
         }
 
-        // if (this.isGameOver && keyCode === ESCAPE) { 
-        //     sound.gamestart.play();
-        //     this.isGameOver = false;
-        //     this.isRunning = true;
-        //     this.gameManager = new GameManager(this);
-        //     this.gameOverScene = new GameOverMenu(this.gameManager);
-
-        // } 
-        if (this.isGameOver && keyIsDown(ESCAPE)) {
+        if (this.isGameOver && keyIsDown(ESCAPE) || this.isShowingLeaderBoard && keyIsDown(ESCAPE)) {
+            sound.bgmgameover.stop();
             this.isGameOver = false;
+            this.isShowingLeaderBoard = false;
             this.isStartMenu = true;
             this.gameOverScene.showInputField();
             this.gameManager = new GameManager(this);
             this.gameOverScene = new GameOverMenu(this.gameManager);
         }
 
-        // bug: enter can be pressed without having to focus on the input field
         if (this.isGameOver && keyIsDown(ENTER)) {
+            if (this.gameOverScene.input.value() == "") {
+                return false;
+            }
+            sound.bgmgameover.stop();
             this.isGameOver = false;
             this.isShowingLeaderBoard = true;
             this.gameOverScene.saveUserDetail();
@@ -65,6 +60,7 @@ class Game implements IGameState {
         }
 
         if (this.isGameOver && keyIsDown(CONTROL)) {
+            sound.bgmgameover.stop();
             this.isGameOver = false;
             this.isShowingLeaderBoard = true;
             this.gameOverScene.showInputField();

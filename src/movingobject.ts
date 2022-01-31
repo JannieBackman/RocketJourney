@@ -15,12 +15,11 @@ class MovingObject {
     public width: number;
     public height: number;
     protected speed: number;
-    protected angle: number;
     protected animationTimeCounter: number;
     protected images: p5.Image[] = [];
     public hitBox: HitBox;
 
-    constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, hitBox: HitBox, angle?: number) {
+    constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, hitBox: HitBox) {
         this.images = images;
         this.x = x;
         this.y = y;
@@ -28,7 +27,6 @@ class MovingObject {
         this.height = height;
         this.speed = speed;
         this.hitBox = hitBox;
-        this.angle = angle ?? 0;
         this.animationTimeCounter = 0;
     }
 

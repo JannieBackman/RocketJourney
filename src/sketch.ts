@@ -96,9 +96,6 @@ function setup() {
 }
 
 function update() {
-	// if (game.scene.update !== undefined) {
-	//  	game.scene.update();
-	// }
 }
 
 function draw() {

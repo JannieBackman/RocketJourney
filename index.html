@@ -21,6 +21,7 @@
         }
 
         input {
+            
             width: 10%;
             min-width: 200px;
             background-color: #c4c4c486;
@@ -31,6 +32,10 @@
             font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
+            position: absolute;
+            left: 50%;
+            top: calc(50% + 12rem);
+            transform: translate(-50%, -50%);
         }
 
         input:focus { outline: none; }
@@ -41,6 +46,11 @@
                 height: unset !important;
             }
         }
+        @media (max-width: 730px) { input { top: calc(50% + 10rem); }}
+        @media (max-width: 600px) { input { top: calc(50% + 9rem); }}
+        @media (max-width: 550px) { input { top: calc(50% + 8rem); }}
+        @media (max-width: 500px) { input { top: calc(50% + 7.5rem); }}
+
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
