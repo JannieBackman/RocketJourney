@@ -52,6 +52,7 @@ class GameManager {
     public update() {
         this.speedDuration += deltaTime;
         if (this.speedDuration >= 8000) {
+            // decreasing the spawnTime so it shortens the time of the calling of createObstacls function
             this.spawnTime -= 100;
             // setting the lowest value of spawnTime to 300
             if (this.spawnTime < 300) {
@@ -70,8 +71,8 @@ class GameManager {
 
         if (this.rocket.x >= (width - this.rocket.width) / 3) {
             this.timeCounter += deltaTime;
-            if (this.timeCounter >= this.spawnTime) {
-                console.log("Spawn Time: " + this.spawnTime)
+            // if (this.timeCounter >= 1500)
+                if (this.timeCounter >= this.spawnTime) {
                 this.createObstacle();
                 this.timeCounter = 0;
             }
