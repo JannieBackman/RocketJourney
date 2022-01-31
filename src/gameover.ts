@@ -1,13 +1,30 @@
 class GameOverMenu {
     private textBlinkTimer: number;
     public gameManager: GameManager;
-    private input: p5.Element; // not done
-    private inputIsOpen: boolean;
+    private input: p5.Element; 
 
     constructor(gameManager: GameManager) {
         this.textBlinkTimer = 0;
-        this.gameManager = gameManager;
-        this.inputIsOpen = true;
+        this.gameManager = gameManager;       
+        this.input = createInput('YOUR NAME', 'text');
+        this.input.style('display', 'none');
+        this.input.position( width / 2, height / 2);  // not correct
+        this.input.addClass('input');
+        // this.input.show();
+}
+
+    saveUserDetail() {
+        const name = this.input.value().toString();
+        const score = this.gameManager.scoreBoard.score;
+        this.gameManager.leaderBoard.leaderBoardArray.push({name: name, score: score})
+    }
+    
+    showInputField() {
+        if (game.isGameOver) {
+            this.input.show()
+        } else {
+            this.input.hide();
+        }
     }
  
     draw() {
@@ -26,20 +43,6 @@ class GameOverMenu {
         fill(255);
         text('PRESS CTRL TO LEADERBOARD', 400, 550)
 
-        ///// not done (line 30-40)
-        if (this.inputIsOpen) {  
-            console.log("input is open")
-            this.input = createInput();
-            this.input.position(400, 550);
-            if (keyCode === ENTER) {
-                // if (input.value == "") {
-                // return false;
-                console.log("hello world")
-                console.log(this.input)
-            }
-        }this.inputIsOpen = false;
-        
-        
         this.textBlinkTimer += deltaTime;
         if (this.textBlinkTimer < 300) {
             fill(255); 

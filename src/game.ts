@@ -4,6 +4,7 @@ interface IGameState {
     isRunning: boolean;
     isGameOver: boolean;
     isScoreUpdated: boolean;
+    isShowingLeaderBoard: boolean;
     isHit: boolean;
 }
 
@@ -16,6 +17,7 @@ class Game implements IGameState {
     public isRunning: boolean;
     public isGameOver: boolean;
     public isScoreUpdated: boolean;
+    public isShowingLeaderBoard: boolean;
     public isHit: boolean;
 
     constructor() {
@@ -27,6 +29,7 @@ class Game implements IGameState {
         this.isRunning = false;
         this.isGameOver = false;
         this.isScoreUpdated = false;
+        this.isShowingLeaderBoard = false;
         this.isHit = false;
 
     }
@@ -34,6 +37,7 @@ class Game implements IGameState {
         if (this.isStartMenu && keyIsDown(32)) {
             sound.gamestart.play();
             this.isRunning = true;
+            this.isStartMenu = false;
         }
 
         // if (this.isGameOver && keyCode === ESCAPE) { 
@@ -44,11 +48,26 @@ class Game implements IGameState {
         //     this.gameOverScene = new GameOverMenu(this.gameManager);
 
         // } 
-        else if (this.isGameOver && keyCode === ESCAPE) {
+        if (this.isGameOver && keyIsDown(ESCAPE)) {
             this.isGameOver = false;
             this.isStartMenu = true;
+            this.gameOverScene.showInputField();
             this.gameManager = new GameManager(this);
             this.gameOverScene = new GameOverMenu(this.gameManager);
+        }
+
+        // bug: enter can be pressed without having to focus on the input field
+        if (this.isGameOver && keyIsDown(ENTER)) {
+            this.isGameOver = false;
+            this.isShowingLeaderBoard = true;
+            this.gameOverScene.saveUserDetail();
+            this.gameOverScene.showInputField();
+        }
+
+        if (this.isGameOver && keyIsDown(CONTROL)) {
+            this.isGameOver = false;
+            this.isShowingLeaderBoard = true;
+            this.gameOverScene.showInputField();
         }
     }
 
@@ -56,6 +75,7 @@ class Game implements IGameState {
         this.isRunning = false;
         this.isGameOver = true;
         this.isHit = false;
+        this.gameOverScene.showInputField();
     }
 
     public update() {
@@ -85,9 +105,10 @@ class Game implements IGameState {
             this.gameOverScene.draw();
         } else if (this.isRunning) {
             this.gameManager.draw();
-            this.isStartMenu = false; // line added for sound play
         } else if (this.isStartMenu) {
             this.startMenuScene.draw();
+        } else if (this.isShowingLeaderBoard) {
+            this.gameManager.leaderBoard.draw();
         }
     }
 }

@@ -14,20 +14,24 @@ interface ObstacleData {
 class GameManager {
     public gameState: IGameState;
     public rocket: Rocket;
+    public scoreBoard: ScoreBoard;
+    public leaderBoard: LeaderBoard; 
     private obstacleData: ObstacleData[]
     public obstacles: Obstacle[]
     private timeCounter: number;
     private speedDuration: number;
     private gameOverAnimationTimer: number;
-    public scoreBoard: ScoreBoard;
+    private spawnTime: number;
 
     constructor(gameState: IGameState) {
         this.gameState = gameState;
         this.rocket = new Rocket(10, (height - 115) / 2, 115, 63, 5)
         this.scoreBoard = new ScoreBoard();
+        this.leaderBoard = new LeaderBoard();
         this.timeCounter = 0;
         this.speedDuration = 0;
         this.gameOverAnimationTimer = 0;
+        this.spawnTime = 1500;
         this.obstacles = [];
         this.obstacleData = [
             { image: images.jellyFish, width: 69, height: 42, speed: 3, hitBox: {x1: 0, y1: 3, width1: 69, height1: 35, x2: 0, y2: 3, width2: 69, height2: 35} },
@@ -48,15 +52,27 @@ class GameManager {
     public update() {
         this.speedDuration += deltaTime;
         if (this.speedDuration >= 8000) {
+            // decreasing the spawnTime so it shortens the time of the calling of createObstacls function
+            this.spawnTime -= 100;
+            // setting the lowest value of spawnTime to 300
+            if (this.spawnTime < 300) {
+                this.spawnTime = 300;
+            }
+            // for increasing the speed of obstacles that have been created 
             for (let i = 0; i < this.obstacles.length; i++) {
                 this.obstacles[i].increaseSpeed();
                 this.speedDuration = 0;
+            }
+            // for setting the same increased speed for obstacles that will be created
+            for (let i = 0; i < this.obstacleData.length; i++) {
+                this.obstacleData[i].speed += 1;
             }
         }
 
         if (this.rocket.x >= (width - this.rocket.width) / 3) {
             this.timeCounter += deltaTime;
-            if (this.timeCounter >= 1500) {
+            // if (this.timeCounter >= 1500)
+                if (this.timeCounter >= this.spawnTime) {
                 this.createObstacle();
                 this.timeCounter = 0;
             }
@@ -140,23 +156,14 @@ class GameManager {
             }
         }
     }
-    
 
     private showExplosion() {
         image(images.explosion, this.rocket.x+(this.rocket.width/2), this.rocket.y, 80, 70);
-
-        // console.log('gameOverAnimationTimer: ' + this.gameOverAnimationTimer)
         this.gameOverAnimationTimer += deltaTime;   
         if (this.gameOverAnimationTimer <= 100) {
             sound.collision.play(); 
-        } else if (this.gameOverAnimationTimer < 1000) {
-            filter(THRESHOLD, 0.2) // dont know?
-        } else if (this.gameOverAnimationTimer < 1500) {
-            // dont know 
-        } else if (this.gameOverAnimationTimer < 2000) {
-            filter(THRESHOLD, 0.2); // dont know?
-        } else if (this.gameOverAnimationTimer < 2500) {
-            // dont know 
+        } else if ((this.gameOverAnimationTimer > 100 && this.gameOverAnimationTimer < 1000) || (this.gameOverAnimationTimer > 1500 && this.gameOverAnimationTimer < 2000)) {
+            filter(THRESHOLD, 0.2);
         } else if (this.gameOverAnimationTimer > 3000) {
             this.gameOverAnimationTimer = 0;
             sound.gameover.play();
