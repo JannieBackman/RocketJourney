@@ -1,17 +1,14 @@
 class GameOverMenu {
     private textBlinkTimer: number;
     public gameManager: GameManager;
-    private input: p5.Element; 
+    public input: p5.Element; 
 
     constructor(gameManager: GameManager) {
         this.textBlinkTimer = 0;
         this.gameManager = gameManager;       
-        this.input = createInput('YOUR NAME', 'text');
+        this.input = createInput();
         this.input.style('display', 'none');
-        this.input.position( width / 2, height / 2);  // not correct
-        this.input.addClass('input');
-        // this.input.elt.placeholder = 'asdasd'
-        // this.input.show();
+        this.input.elt.placeholder = 'YOUR NAME';
 }
 
     saveUserDetail() {
@@ -33,7 +30,8 @@ class GameOverMenu {
  
     draw() {
         this.gameManager.scoreBoard.draw()
-        
+
+        push();
         textSize(55);
         textAlign(CENTER);
         fill(255);
@@ -56,5 +54,6 @@ class GameOverMenu {
         if (this.textBlinkTimer >= 600) {
             this.textBlinkTimer = 0;
         }
+        pop();
     } 
 }
