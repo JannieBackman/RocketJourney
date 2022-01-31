@@ -8,6 +8,7 @@ class StartMenu {
     draw() {
         image(images.upAndDown, (images.background[0].width / 20 -  images.upAndDown.width / 2), 450)
 
+        push();
         textSize(55);
         textAlign(CENTER);
         fill(255);
@@ -26,5 +27,6 @@ class StartMenu {
         if (this.textBlinkTimer >= 600) {
             this.textBlinkTimer = 0;
         }
+        pop();
     }
 }

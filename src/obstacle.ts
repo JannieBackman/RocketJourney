@@ -1,8 +1,8 @@
 class Obstacle extends MovingObject {
     public isBehindRocket: boolean;
 
-constructor(images: p5.Image[], hitBox: HitBox, x: number, y: number, width: number, height: number, speed: number, angle?: number) {
-        super(images, x, y, width, height, speed, hitBox, angle);
+constructor(images: p5.Image[], hitBox: HitBox, x: number, y: number, width: number, height: number, speed: number) {
+        super(images, x, y, width, height, speed, hitBox);
         this.isBehindRocket = false;
     }
 
@@ -24,12 +24,3 @@ constructor(images: p5.Image[], hitBox: HitBox, x: number, y: number, width: num
         }
     }
 }
-
-// class Explosion extends MovingObject {
-//     constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, hitBox: HitBox, angle?: number) {
-
-    
-//     super(images: p5.Image[], x,y, width, height, speed, hitBox)
-//     }
-// }
-

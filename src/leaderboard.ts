@@ -5,13 +5,14 @@ interface LeaderBoardData {
 
 class LeaderBoard {
     public leaderBoardArray: LeaderBoardData[];
+    private textBlinkTimer: number;
 
     constructor() {
         this.leaderBoardArray = JSON.parse(localStorage.leaderboard || "[]");
+        this.textBlinkTimer = 0;
     }
 
     draw() {
-        console.log(this.leaderBoardArray)
         image(images.leaderBoard, (images.background[0].width / 20 - images.leaderBoard.width / 2), (images.background[0].height / 20 - images.leaderBoard.height / 2),);
         push()
         textSize(18);
@@ -31,9 +32,18 @@ class LeaderBoard {
             text(this.leaderBoardArray[i].score, 550, y)
         }
 
+        this.textBlinkTimer += deltaTime;
+        if (this.textBlinkTimer < 300) {
+            fill(255); 
+        } else {
+            fill(150);
+        }         
         textAlign(CENTER);
         textSize(14)
         text('PRESS ESC TO RESTART', 400, 550)
+        if (this.textBlinkTimer >= 600) {
+            this.textBlinkTimer = 0;
+        }
         pop();
     }
 }

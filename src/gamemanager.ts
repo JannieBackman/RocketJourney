@@ -1,9 +1,3 @@
-// interface GameWindow {
-//     width: number;
-//     height: number;
-//     x: number;
-//     y: number;
-// }
 interface ObstacleData {
     image: p5.Image[];
     hitBox: HitBox;
@@ -45,8 +39,8 @@ class GameManager {
             { image: images.superman, width: 120, height: 62, speed: 3, hitBox: {x1: 0, y1: 40, width1: 120, height1: 22, x2: 25, y2: 5, width2: 70, height2: 57} },
         ]; 
         sound.bgm.setVolume(0.05);
-        sound.bgm.play();
-        sound.bgmgameover.setVolume(0.5);
+        sound.bgm.loop();
+        sound.bgmgameover.setVolume(0.05);
     }
 
     public update() {
@@ -98,7 +92,7 @@ class GameManager {
         const obstacleData = random(this.obstacleData);
         let yPos = random(-10, height - obstacleData.height + 10);
         let xPos = width;
-        this.obstacles.push(new Obstacle(obstacleData.image, obstacleData.hitBox, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed, random(200, 160)));
+        this.obstacles.push(new Obstacle(obstacleData.image, obstacleData.hitBox, xPos, yPos, obstacleData.width, obstacleData.height, obstacleData.speed));
     }
 
     private checkCollision() {
