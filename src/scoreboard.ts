@@ -6,7 +6,6 @@ class ScoreBoard {
 
     constructor() {
         this.score = 0;
-        textFont(font);
         this.scoreArray = JSON.parse(localStorage.highscore || "[]");
         this.textBlinkTimer = 0;
     }
@@ -19,29 +18,27 @@ class ScoreBoard {
     }
 
     public draw() {
+        push()
+        textSize(20);
+        fill(255);
+        textAlign(RIGHT);
+        
         this.showCurrentScore();
         if (game.isGameOver && this.score === Math.max(...this.scoreArray, 0)) {
             this.showHighScoreEffect();
         } else {
             this.showBestScore();
         }
+        pop()
     }
 
     /** Draws text for current score */
     private showCurrentScore() {
-        push();
-        textSize(20);
-        fill(255);
-        textAlign(RIGHT);
         text('SCORE ' + this.score, 800, 25);
-        pop();
     }
 
     /** Draws text for best score */
     public showBestScore() {
-        textSize(20);
-        fill(255);
-        textAlign(RIGHT);
         text('BEST ' + Math.max(...this.scoreArray, 0), 800, 50);
     }
 

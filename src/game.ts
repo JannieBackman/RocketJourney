@@ -55,9 +55,7 @@ class Game implements IGameState {
         }
 
         if (this.isGameOver && keyIsDown(ENTER)) {
-            if (this.gameOverScene.input.value() == "") {
-                return false;
-            }
+            if (this.gameOverScene.input.value() == "") return;
             sound.bgmgameover.stop();
             this.isGameOver = false;
             this.isShowingLeaderBoard = true;
@@ -90,6 +88,7 @@ class Game implements IGameState {
 
     public draw() {
         background('rgb(0, 4, 10)');
+        textFont(font);
 
         this.backgroundImageTimeCounter += deltaTime;
         let i;
