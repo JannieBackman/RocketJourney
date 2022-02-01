@@ -39,12 +39,10 @@ class ScoreBoard {
 
     /** Draws text for best score */
     public showBestScore() {
-        push();
         textSize(20);
         fill(255);
         textAlign(RIGHT);
         text('BEST ' + Math.max(...this.scoreArray, 0), 800, 50);
-        pop();
     }
 
     /** text animation */
@@ -52,7 +50,7 @@ class ScoreBoard {
         push();
         this.textBlinkTimer += deltaTime;
         if (this.textBlinkTimer < 300) {
-            fill(247, 197, 59); 
+            fill(247, 197, 59);
         } else {
             fill(255);
         } text('BEST ' + Math.max(...this.scoreArray, 0), 800, 50);
