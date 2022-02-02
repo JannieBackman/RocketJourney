@@ -20,8 +20,8 @@ class MovingObject {
     public width: number;
     public height: number;
     protected speed: number;
-    protected animationTimeCounter: number;
-    protected images: p5.Image[] = [];
+    private animationTimeCounter: number;
+    private images: p5.Image[] = [];
     public hitBox: HitBox;
 
     constructor(images: p5.Image[], x: number, y: number, width: number, height: number, speed: number, hitBox: HitBox) {

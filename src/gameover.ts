@@ -12,7 +12,7 @@ class GameOverMenu {
         this.input.elt.placeholder = 'YOUR NAME';
 }
     /** Saves user's name input and score to the array for leaderboard */
-    saveUserDetail() {
+    public saveUserDetail() {
         let leaderBoardArray = this.gameManager.leaderBoard.leaderBoardArray;
         const name = this.input.value().toString().toUpperCase();
         const score = this.gameManager.scoreBoard.score;
@@ -22,7 +22,7 @@ class GameOverMenu {
     }
     
     /** Displays or hides input field */
-    showInputField() {
+    public showInputField() {
         if (game.isGameOver) {
             this.input.show()
         } else {
@@ -30,7 +30,7 @@ class GameOverMenu {
         }
     }
  
-    draw() {
+    public draw() {
         this.gameManager.scoreBoard.draw()
 
         push();
