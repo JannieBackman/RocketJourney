@@ -58,18 +58,18 @@ class MovingObject {
     }
 
     /** Draws hit boxes (for debugging) */
-    private drawHitBox() {
-        push();
-        stroke('red');
-        noFill();
-        const x = this.x + this.hitBox.x1;
-        const y = this.y + this.hitBox.y1;
-        rect(x, y, this.hitBox.width1, this.hitBox.height1)
-        stroke('yellow');
-        const x2 = this.x + this.hitBox.x2;
-        const y2 = this.y + this.hitBox.y2;
-        rect(x2, y2, this.hitBox.width2, this.hitBox.height2)
-        pop();
-    }
+    // private drawHitBox() {
+    //     push();
+    //     stroke('red');
+    //     noFill();
+    //     const x = this.x + this.hitBox.x1;
+    //     const y = this.y + this.hitBox.y1;
+    //     rect(x, y, this.hitBox.width1, this.hitBox.height1)
+    //     stroke('yellow');
+    //     const x2 = this.x + this.hitBox.x2;
+    //     const y2 = this.y + this.hitBox.y2;
+    //     rect(x2, y2, this.hitBox.width2, this.hitBox.height2)
+    //     pop();
+    // }
 
 }
