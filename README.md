@@ -14,3 +14,6 @@
 * *Olivia* (https://github.com/OliviaIsberg)
 * *Jannie* (https://github.com/Jannie87)
 * *Emil* (https://github.com/empafrontend)
+
+
+DEMO: https://rocketjourney.netlify.app
